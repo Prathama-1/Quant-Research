@@ -1,0 +1,57 @@
+﻿=== 1. plain EW universe (close to close, signal at t applies to the return of t+1, no costs)
+ eval buy&hold: Sharpe 2.08 CAGR 40.0% DD -19.5%
+ breadth >= 0.30: eval Sharpe 2.08 CAGR  34.1% DD  -16.5% in-mkt  88% switches/yr  11 | warm total  -14.1%
+ breadth >= 0.40: eval Sharpe 2.23 CAGR  33.6% DD  -11.4% in-mkt  77% switches/yr  13 | warm total  -10.4%
+ breadth >= 0.50: eval Sharpe 2.32 CAGR  32.0% DD   -8.5% in-mkt  68% switches/yr   8 | warm total   -7.8%
+ breadth >= 0.55: eval Sharpe 2.02 CAGR  26.4% DD   -7.9% in-mkt  63% switches/yr  12 | warm total   -7.5%
+ breadth >= 0.60: eval Sharpe 2.21 CAGR  26.1% DD   -9.5% in-mkt  57% switches/yr  13 | warm total   -4.2%
+ breadth >= 0.65: eval Sharpe 2.44 CAGR  24.0% DD   -7.1% in-mkt  51% switches/yr  18 | warm total   -3.2%
+ breadth >= 0.70: eval Sharpe 2.92 CAGR  24.2% DD   -3.7% in-mkt  37% switches/yr  13 | warm total   -3.5%
+ breadth >= 0.80: eval Sharpe 2.19 CAGR  13.8% DD   -4.1% in-mkt  24% switches/yr  11 | warm total    0.0%
+
+=== 6. next-day EW return by breadth bucket (bps, t), eval and warm
+eval
+             bps    t    n
+b                         
+(0.0, 0.3]  14.9  0.8   71
+(0.3, 0.4]   2.0  0.1   62
+(0.4, 0.5]   5.7  0.4   53
+(0.5, 0.6]  18.5  1.2   59
+(0.6, 0.7]   3.6  0.4  115
+(0.7, 0.8]  27.1  3.0   75
+(0.8, 1.0]  21.2  3.4  141
+warm
+             bps    t   n
+b                        
+(0.0, 0.3]  32.1  0.5  16
+(0.3, 0.4] -18.5 -0.6  22
+(0.4, 0.5] -18.0 -0.5  15
+(0.5, 0.6] -16.5 -0.6  22
+(0.6, 0.7]  -5.8 -0.2  11
+(0.7, 0.8] -63.2 -1.3   7
+ autocorrelation of daily EW returns, eval: lag1 0.054 lag2 0.020 lag5 0.028; Nifty lag1 -0.034
+
+=== 2. threshold curve on the strategy (band (x, x), sell when off)
+band 0.30                      eval Sh  1.92 DD  -29.8 CAGR  41.3 tr   83 tim  78% | tough Sh  1.30 DD  -17.1 CAGR  24.3 | warm  -14.9% DD  -20.5
+band 0.35                      eval Sh  1.90 DD  -25.8 CAGR  39.3 tr   81 tim  75% | tough Sh  1.29 DD  -17.0 CAGR  23.0 | warm  -15.9% DD  -21.6
+band 0.40                      eval Sh  2.12 DD  -19.6 CAGR  43.0 tr   90 tim  69% | tough Sh  1.23 DD  -16.4 CAGR  19.0 | warm  -15.3% DD  -20.9
+band 0.45                      eval Sh  2.33 DD  -13.3 CAGR  45.9 tr   77 tim  65% | tough Sh  1.69 DD  -10.3 CAGR  24.3 | warm  -12.1% DD  -18.1
+band 0.50                      eval Sh  2.58 DD   -9.9 CAGR  51.9 tr   78 tim  62% | tough Sh  1.75 DD  -11.7 CAGR  23.4 | warm   -8.3% DD  -13.3
+band 0.55                      eval Sh  2.27 DD  -14.4 CAGR  40.6 tr   96 tim  56% | tough Sh  1.62 DD  -10.4 CAGR  18.5 | warm   -1.4% DD   -6.9
+band 0.60                      eval Sh  2.97 DD  -10.9 CAGR  46.6 tr   94 tim  50% | tough Sh  1.57 DD   -7.8 CAGR  16.1 | warm    0.7% DD   -2.8
+band 0.65                      eval Sh  2.79 DD  -13.9 CAGR  40.0 tr  100 tim  43% | tough Sh  1.48 DD   -5.4 CAGR  11.3 | warm   -1.3% DD   -1.6
+band 0.70                      eval Sh  3.33 DD   -6.6 CAGR  36.8 tr   78 tim  33% | tough Sh  0.78 DD   -4.9 CAGR   4.2 | warm   -0.5% DD   -1.2
+band 0.75                      eval Sh  2.61 DD   -5.7 CAGR  25.4 tr   52 tim  28% | tough Sh -0.05 DD   -4.4 CAGR  -0.2 | warm   -1.4% DD   -1.4
+band 0.80                      eval Sh  1.83 DD  -10.1 CAGR  14.3 tr   64 tim  20% | tough Sh -0.94 DD   -3.6 CAGR  -1.4 | warm    0.0% DD    0.0
+
+=== 5a. other breadth windows
+
+=== 5b. hysteresis around 0.6
+band (0.60, 0.60)              eval Sh  2.97 DD  -10.9 CAGR  46.6 tr   94 tim  50% | tough Sh  1.57 DD   -7.8 CAGR  16.1 | warm    0.7% DD   -2.8
+band (0.55, 0.60)              eval Sh  2.41 DD  -10.2 CAGR  40.2 tr   83 tim  54% | tough Sh  1.69 DD   -8.0 CAGR  18.1 | warm    4.9% DD   -2.8
+band (0.50, 0.60)              eval Sh  2.18 DD  -10.6 CAGR  40.8 tr   74 tim  58% | tough Sh  1.94 DD   -9.1 CAGR  23.2 | warm   -3.2% DD   -7.7
+band (0.60, 0.65)              eval Sh  2.71 DD  -12.8 CAGR  41.9 tr   83 tim  48% | tough Sh  1.40 DD   -9.4 CAGR  13.2 | warm   -1.8% DD   -2.2
+band (0.60, 0.70)              eval Sh  2.59 DD  -11.8 CAGR  37.5 tr   62 tim  42% | tough Sh  1.72 DD   -6.5 CAGR  13.9 | warm   -1.8% DD   -2.2
+band (0.55, 0.65)              eval Sh  2.13 DD  -10.4 CAGR  34.7 tr   74 tim  52% | tough Sh  1.70 DD   -9.4 CAGR  16.8 | warm   -1.8% DD   -2.2
+band (0.50, 0.50)              eval Sh  2.58 DD   -9.9 CAGR  51.9 tr   78 tim  62% | tough Sh  1.75 DD  -11.7 CAGR  23.4 | warm   -8.3% DD  -13.3
+band (0.45, 0.55)              eval Sh  2.25 DD  -12.9 CAGR  43.3 tr   66 tim  62% | tough Sh  1.75 DD  -13.1 CAGR  24.4 | warm  -12.9% DD  -19.0

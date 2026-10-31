@@ -1,0 +1,110 @@
+﻿=== official numbers
+{'cagr': 22.49, 'dd': -4.73, 'sharpe': 2.946, 'calmar': 4.75, 'tr_yr': 110.4, 'win': 69.0, 'tim': 5.4}
+yearly % {'2017': 9.2, '2018': 21.2, '2019': 19.2, '2020': 42.6, '2021': 16.6, '2022': 1.5}
+
+=== stress
+          cagr    dd  sharpe  calmar  tr_yr   win  tim
+base     22.49 -4.73   2.946    4.75  110.4  69.0  5.4
+delay_1  21.37 -4.66   2.611    4.58  110.4  64.4  5.4
+delay_2  16.86 -4.40   1.937    3.83  110.4  59.1  5.4
+2x_cost  15.61 -5.42   1.782    2.88  110.4  64.5  5.4
+
+=== gate: bars where the paper-trade gate changes the position in-sample: 0
+
+=== cost multiples (break-even cost)
+1x cost: Sharpe 2.95 CAGR 22.5% DD -4.7%
+2x cost: Sharpe 1.78 CAGR 15.6% DD -5.4%
+3x cost: Sharpe 0.60 CAGR 9.1% DD -6.4%
+4x cost: Sharpe -0.57 CAGR 3.0% DD -8.3%
+5x cost: Sharpe -1.72 CAGR -2.8% DD -18.1%
+
+=== sub-periods
+dev 2017-19 {'cagr': 18.09, 'dd': -2.5, 'sharpe': 2.697, 'calmar': 7.23, 'tr_yr': 108.6, 'win': 67.8, 'tim': 5.4}
+val 2020-Jan22 {'cagr': 28.53, 'dd': -4.73, 'sharpe': 3.269, 'calmar': 6.03, 'tr_yr': 112.8, 'win': 70.6, 'tim': 5.4}
+share of sessions followed by a night in the market: 44.7%
+
+=== best year removed: {'best_year': 2020, 'cagr': 0.18199206398886836, 'sharpe': 2.370680780700231, 'dd': -0.04733781267982129}
+
+=== trades n=533 win=69.0% mean=15.27 bps median=15.82 bps best=2.13% worst=-1.79% | top 10 trades share of gross profit 11.6%, of net profit 19.5%
+
+=== zero-cost CAGR 29.77%, net 22.49%, drag 7.29%/yr; turnover 221x/yr (sides)
+
+=== OOS extension Feb22-Jun24 by path seed
+ Sh 1.76 DD -4.4% CAGR 16.3% tr/yr 109 {'2022': 10.4, '2023': 15.4, '2024': 12.8}
+ Sh 1.04 DD -3.7% CAGR 12.4% tr/yr 109 {'2022': 12.6, '2023': 10.0, '2024': 6.9}
+ Sh 1.48 DD -7.0% CAGR 15.6% tr/yr 114 {'2022': 10.9, '2023': 13.8, '2024': 12.3}
+ Sh 0.51 DD -7.3% CAGR 9.0% tr/yr 90 {'2022': 5.5, '2023': 5.8, '2024': 10.3}
+ Sh 2.53 DD -4.4% CAGR 20.7% tr/yr 111 {'2022': 20.7, '2023': 17.9, '2024': 10.5}
+ mean {'sharpe': 1.4630528568764192, 'dd': -0.05390421362672056, 'cagr': 0.1479820549073494, 'trades_per_yr': 106.74618451025056, 'sharpe_min': 0.5084051717128941, 'sharpe_max': 2.528478007429457}
+
+=== decay: X bps removed from each night. OOS mean over seeds, then real IS. Sharpe / DD% / CAGR%
+ - 0 bps: OOS  1.43 / -5.1 / 14.8 | IS  2.95 / -4.7 / 22.5
+ - 3 bps: OOS  0.95 / -5.1 / 11.4 | IS  2.14 / -4.8 / 17.5
+ - 6 bps: OOS -0.11 / -4.8 /  5.7 | IS  1.63 / -4.1 / 13.7
+ - 9 bps: OOS -0.29 / -3.9 /  5.0 | IS  1.12 / -3.2 / 11.0
+ -12 bps: OOS -0.68 / -5.1 /  3.6 | IS  0.65 / -3.3 /  8.6
+ -15 bps: OOS -0.89 / -4.3 /  3.2 | IS  0.34 / -2.9 /  7.2
+
+=== sensitivity grid: MA days x session floor (IS Sharpe / IS DD / d1 / 2x / OOS Sharpe)
+ ma 10 floor  -0.75%: Sh 2.87 DD  -7.7% CAGR 24.3% | d1 2.32 2x 1.55 | OOS 0.67
+ ma 10 floor  -0.50%: Sh 2.88 DD  -7.9% CAGR 23.9% | d1 2.40 2x 1.61 | OOS 0.79
+ ma 10 floor  -0.25%: Sh 2.74 DD  -7.2% CAGR 22.1% | d1 2.32 2x 1.62 | OOS 1.13
+ ma 10 floor   0.00%: Sh 2.71 DD  -7.2% CAGR 19.3% | d1 2.66 2x 1.73 | OOS 1.27
+ ma 15 floor  -0.75%: Sh 3.01 DD  -7.6% CAGR 25.2% | d1 2.34 2x 1.65 | OOS 0.85
+ ma 15 floor  -0.50%: Sh 3.03 DD  -7.3% CAGR 24.7% | d1 2.48 2x 1.73 | OOS 0.96
+ ma 15 floor  -0.25%: Sh 2.87 DD  -6.0% CAGR 22.5% | d1 2.50 2x 1.73 | OOS 1.17
+ ma 15 floor   0.00%: Sh 2.72 DD  -6.1% CAGR 19.1% | d1 2.67 2x 1.73 | OOS 1.12
+ ma 20 floor  -0.75%: Sh 3.12 DD  -6.3% CAGR 25.7% | d1 2.51 2x 1.74 | OOS 0.98
+ ma 20 floor  -0.50%: Sh 3.08 DD  -6.1% CAGR 24.7% | d1 2.55 2x 1.77 | OOS 0.97
+ ma 20 floor  -0.25%: Sh 2.95 DD  -4.7% CAGR 22.5% | d1 2.61 2x 1.78 | OOS 1.43
+ ma 20 floor   0.00%: Sh 2.89 DD  -4.3% CAGR 19.6% | d1 2.87 2x 1.89 | OOS 1.42
+ ma 25 floor  -0.75%: Sh 3.03 DD  -3.3% CAGR 27.0% | d1 2.50 2x 1.74 | OOS 1.00
+ ma 25 floor  -0.50%: Sh 3.01 DD  -3.3% CAGR 26.1% | d1 2.54 2x 1.78 | OOS 1.02
+ ma 25 floor  -0.25%: Sh 2.88 DD  -2.9% CAGR 24.1% | d1 2.65 2x 1.81 | OOS 1.47
+ ma 25 floor   0.00%: Sh 2.78 DD  -4.0% CAGR 20.9% | d1 2.83 2x 1.88 | OOS 1.39
+ ma 30 floor  -0.75%: Sh 3.04 DD  -3.4% CAGR 27.1% | d1 2.46 2x 1.74 | OOS 0.82
+ ma 30 floor  -0.50%: Sh 3.05 DD  -3.4% CAGR 26.4% | d1 2.55 2x 1.82 | OOS 0.79
+ ma 30 floor  -0.25%: Sh 2.91 DD  -2.9% CAGR 24.3% | d1 2.66 2x 1.85 | OOS 1.26
+ ma 30 floor   0.00%: Sh 2.79 DD  -3.3% CAGR 21.0% | d1 2.82 2x 1.91 | OOS 1.31
+
+=== one parameter at a time
+ decide_at    13:45  Sh 2.72 DD  -3.4% CAGR 22.8% tr 112 | d1 2.13 d2 2.02 2x 1.65 | OOS 0.62 DD -5.8% | OOS at -9bps -0.41
+ decide_at    14:00  Sh 2.79 DD  -3.4% CAGR 22.8% tr 111 | d1 2.36 d2 2.17 2x 1.69 | OOS 0.91 DD -5.4% | OOS at -9bps -0.54
+ decide_at    14:15  Sh 2.75 DD  -7.2% CAGR 22.2% tr 114 | d1 2.12 d2 1.92 2x 1.61 | OOS 0.89 DD -5.4% | OOS at -9bps -0.34
+ decide_at    14:30  Sh 2.95 DD  -4.7% CAGR 22.5% tr 110 | d1 2.61 d2 1.94 2x 1.78 | OOS 1.43 DD -5.1% | OOS at -9bps -0.29
+ vol_cap      0.25   Sh 2.83 DD  -4.7% CAGR 21.2% tr 107 | d1 2.47 d2 1.84 2x 1.67 | OOS 1.26 DD -5.1% | OOS at -9bps -0.42
+ vol_cap      0.3    Sh 2.87 DD  -4.7% CAGR 21.8% tr 110 | d1 2.53 d2 1.86 2x 1.69 | OOS 1.32 DD -5.1% | OOS at -9bps -0.37
+ vol_cap      0.35   Sh 2.95 DD  -4.7% CAGR 22.5% tr 110 | d1 2.61 d2 1.94 2x 1.78 | OOS 1.43 DD -5.1% | OOS at -9bps -0.29
+ vol_cap      0.45   Sh 2.94 DD  -4.7% CAGR 22.5% tr 111 | d1 2.58 d2 1.92 2x 1.78 | OOS 1.43 DD -5.1% | OOS at -9bps -0.29
+ vol_cap      9.9    Sh 2.71 DD  -4.7% CAGR 23.2% tr 112 | d1 2.27 d2 1.66 2x 1.66 | OOS 1.43 DD -5.1% | OOS at -9bps -0.29
+ gate_nights  60     Sh 2.90 DD  -4.7% CAGR 22.1% tr 108 | d1 2.55 d2 1.90 2x 1.75 | OOS 1.32 DD -5.1% | OOS at -9bps -0.12
+ gate_nights  90     Sh 2.95 DD  -4.7% CAGR 22.5% tr 110 | d1 2.61 d2 1.94 2x 1.78 | OOS 1.39 DD -5.1% | OOS at -9bps -0.29
+ gate_nights  120    Sh 2.95 DD  -4.7% CAGR 22.5% tr 110 | d1 2.61 d2 1.94 2x 1.78 | OOS 1.43 DD -5.1% | OOS at -9bps -0.29
+ gate_nights  180    Sh 2.95 DD  -4.7% CAGR 22.5% tr 110 | d1 2.61 d2 1.94 2x 1.78 | OOS 1.47 DD -5.1% | OOS at -9bps -0.46
+ gate_nights  250    Sh 2.95 DD  -4.7% CAGR 22.5% tr 110 | d1 2.61 d2 1.94 2x 1.78 | OOS 1.47 DD -5.1% | OOS at -9bps -0.35
+ gate_bps     -999   Sh 2.95 DD  -4.7% CAGR 22.5% tr 110 | d1 2.61 d2 1.94 2x 1.78 | OOS 1.47 DD -5.1% | OOS at -9bps -0.35
+ gate_bps     3      Sh 2.95 DD  -4.7% CAGR 22.5% tr 110 | d1 2.61 d2 1.94 2x 1.78 | OOS 1.47 DD -5.1% | OOS at -9bps -0.61
+ gate_bps     5      Sh 2.95 DD  -4.7% CAGR 22.5% tr 110 | d1 2.61 d2 1.94 2x 1.78 | OOS 1.47 DD -5.1% | OOS at -9bps -0.49
+ gate_bps     7      Sh 2.95 DD  -4.7% CAGR 22.5% tr 110 | d1 2.61 d2 1.94 2x 1.78 | OOS 1.43 DD -5.1% | OOS at -9bps -0.29
+ gate_bps     10     Sh 2.95 DD  -4.7% CAGR 22.5% tr 110 | d1 2.61 d2 1.94 2x 1.78 | OOS 1.08 DD -5.1% | OOS at -9bps -0.23
+ gate_bps     15     Sh 2.71 DD  -4.7% CAGR 20.2% tr  89 | d1 2.51 d2 1.88 2x 1.72 | OOS 0.69 DD -5.1% | OOS at -9bps -0.18
+
+=== strict look-ahead: 400 random cuts + every bar of 5 random days + short session day
+ cuts tested 528, mismatches 0, 3.6s
+ future-corruption test: changed positions before the cut = 0
+
+=== cold start: run only on bars from a late date; how fast does it agree with the full run?
+ 2019-01-01: Sharpe 3.05 DD -4.7% | agreement with full run 100.0% | last disagreement None
+ 2020-06-01: Sharpe 3.46 DD -4.7% | agreement with full run 99.9% | last disagreement 2020-06-17 15:00:00
+ 2021-02-01: Sharpe 1.35 DD -4.7% | agreement with full run 99.9% | last disagreement 2021-08-17 15:00:00
+
+=== short sessions and odd calendars: synthetic sessions at various times inserted into the data
+ values [np.float64(0.0)] non-zero bars after insertion: 0
+ valid output: True
+
+=== empty and tiny inputs
+ first 1 bars: ok, non-zero 0
+ first 2 bars: ok, non-zero 0
+ first 5 bars: ok, non-zero 0
+ first 30 bars: ok, non-zero 0
+ first 201 bars: ok, non-zero 0

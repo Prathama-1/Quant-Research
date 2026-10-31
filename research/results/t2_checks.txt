@@ -1,0 +1,33 @@
+﻿=== sudden-collapse ghosts: -60% overnight, then gone (12 seeds)
+ 15 ghosts: Sharpe 3.01 CAGR 47.6% DD -11.2% trades in ghosts per run 1.8
+ 30 ghosts: Sharpe 3.04 CAGR 48.0% DD -11.0% trades in ghosts per run 3.3
+ 60 ghosts: Sharpe 2.99 CAGR 48.2% DD -11.1% trades in ghosts per run 9.8
+
+=== survivorship tell: forward return to Jun 2024 by liquidity bucket on 28 Feb 2022 (60d median traded value)
+            n   mean  median  share_negative
+b                                           
+<1cr       22  359.1   278.1             0.0
+1-5cr      79  298.0   168.2             3.8
+5-10cr     70  249.3   150.1            11.4
+10-25cr    86  149.5   106.4            14.0
+25-50cr    61  122.0    92.7            14.8
+50-100cr   66  109.7    70.9            10.6
+>100cr    104   76.0    61.0            15.4
+ names with no price at all in the window (cannot be evaluated): 0; names alive on the last date: 555 of 555
+ names not yet with 40 days of history on 28 Feb 2022: 67 (later IPOs that made the 2026 list)
+
+=== speed on a long history: data tiled forward to about 1,380 days, hidden-length window of about 570 days
+ 1380 rows of history, 590 days simulated: 4.5s, Sharpe 2.80, trades 223
+
+=== shock injection: a held stock jumps -50% (and in another run +100%); a held stock stops trading
+ target: TITAGARH held 2023-04-19 to 2023-10-10, shock on 2023-07-17
+ -50%   Sharpe 2.83 CAGR 43.8% DD -11.3% | position exit 2023-07-18 (shock was 2023-07-17)
+ +100%  Sharpe 3.01 CAGR 52.3% DD -11.3% | position exit 2023-07-18 (shock was 2023-07-17)
+ halt   15 missing days on a held stock: runs, Sharpe 3.03, trades 220, sells re-issued OK
+
+=== cold start: the harness gets very little history before the window
+ history from 2023-06-01: Sharpe 1.68, trades 92, first entry 2023-12-04, DD -10.5%
+ history from 2024-01-02: Sharpe 0.00, trades 0, first entry None, DD 0.0%
+
+=== all-cash floor: one row of history, no positions possible
+ ok, final equity 1.0

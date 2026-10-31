@@ -1,0 +1,79 @@
+﻿real stock-day returns: 400362 of a 790 x 555 panel
+moves above 20%: 49. Sorted by traded value on the day / prior 20-day median (tv_ratio).
+A real jump normally has a large tv_ratio. Near 1 suggests a rescaling artefact, especially with most of the move at the open.
+
+      date     symbol    ret  gap_pct  day_range  tv_ratio  vol_ratio  held
+2023-04-18   ALLCARGO -20.99   -24.76      10.51      0.29       0.38 False
+2023-03-31        SCI  30.00    30.00       7.37      0.58       0.47 False
+2024-02-02      PAYTM -20.00   -20.00       0.00      1.49       2.28 False
+2022-06-07   SPLPETRO -49.10   -47.29       4.65      1.80       3.36 False
+2023-02-08   ADANIENT  20.04     3.71      20.71      3.20       5.23 False
+2024-04-23    ASTERDM -22.18   -22.66       4.53      3.61       4.14 False
+2024-06-04       SAIL -20.02    -0.87      32.13      3.66       4.63 False
+2024-06-04       BHEL -20.84    -0.13      38.83      4.17       4.66 False
+2023-05-09      EMBDL -20.00    -0.43      24.46      4.28       4.78 False
+2022-10-27       NMDC  85.71    63.81      18.80      4.38       2.36 False
+2023-02-01   ADANIENT -28.20     0.71      55.10      5.11       8.49 False
+2024-06-04        PFC -23.08    -1.78      30.95      5.46       6.28 False
+2022-01-11       IDEA -20.54    -9.76      19.30      5.55       7.13 False
+2024-06-04     RECLTD -25.19    -1.74      33.18      5.62       6.90 False
+2022-03-03   KRISHANA  20.05     1.90      19.09      6.18       5.52 False
+2024-01-23       ZEEL -32.60    -9.98      36.59      7.19      11.80 False
+2023-02-06       IDEA  20.44     9.49      14.67      7.33       6.21 False
+2023-12-29       IDEA  20.75     1.51      22.18      7.43       6.29 False
+2023-02-02   ADANIENT -26.70    10.00      57.15      8.42      19.52 False
+2021-10-13       TMPV  20.45     9.99      13.16     10.38       6.70 False
+2022-06-13    RBLBANK -22.67    -9.99      18.41     10.63      13.42 False
+2021-06-07 ADANIPOWER  20.09     6.38      14.16     10.66       8.29 False
+2021-09-16       IDEA  25.70     9.50      19.17     11.46       7.15 False
+2022-04-01      IOLCP  20.00     0.00      20.00     11.47      10.54 False
+2024-06-18      PARAS  20.00     5.71      14.73     11.66       7.28 False
+2024-06-04 ADANIPORTS -21.15    -1.64      31.14     14.45      15.58 False
+2021-11-02   ALLCARGO  20.00     7.30      12.92     14.61      12.14 False
+2021-10-22        IRB  20.13     4.34      16.05     14.86      10.62 False
+2021-12-08        HCC  20.06     1.24      18.59     15.01      10.00 False
+2022-01-19   PRECWIRE  20.01     4.62      18.54     17.60      10.63 False
+2021-07-13   GOODLUCK  20.05     4.90      14.44     19.17      13.63 False
+2022-03-09      IOLCP  20.02     1.67      18.05     22.18      22.74 False
+2022-12-02    SKIPPER  20.01    -0.51      20.63     23.17      17.44 False
+2024-06-05      PTCIL  20.00     3.04      21.12     24.99      19.04 False
+2024-01-15    TFCILTD  20.00    -1.75      22.14     27.19      21.44 False
+2021-10-18      PARAS  20.03     3.01      21.58     27.83      20.25 False
+2023-05-11 NEULANDLAB  20.00    -0.24      21.90     30.40      23.73 False
+2021-05-21 THANGAMAYL  20.02     1.66      19.46     32.63      26.32 False
+2024-05-13       DYCL  20.01     2.36      17.24     32.81      26.93 False
+2024-01-11    POLYCAB -21.04   -10.00      16.30     39.01      57.12 False
+2021-05-12   GODREJCP  21.87     8.21      15.37     46.48      37.57 False
+2021-09-22       ZEEL  31.72     9.99      26.35     46.81      24.61 False
+2021-09-14       ZEEL  39.97     9.98      31.82     48.92      32.35 False
+2022-10-28  JINDWORLD  20.06     2.62      19.13     49.44      42.28 False
+2024-01-18       OFSS  30.12    10.50      19.20     55.35      35.30 False
+2023-02-08       PGIL  20.04    15.14       7.37     67.75      60.17 False
+2023-07-12  PREMEXPLN  20.03    19.22       6.42     73.40      46.19 False
+2022-09-14 TATAINVEST  20.18     0.00      23.58    112.68      71.76 False
+2021-04-29     APOLLO  20.11     2.17      18.18       NaN        NaN False
+
+moves with tv_ratio under 2: 4
+median tv_ratio over all moves above 20%: 11.6
+moves held by the strategy on the day: 0
+
+moves made almost entirely at the open with little extra trading, and every trade the strategy made in those names:
+ ALLCARGO  move on 2023-04-18 | trades: []
+ SCI       move on 2023-03-31 | trades: []
+ SPLPETRO  move on 2022-06-07 | trades: []
+ ASTERDM   move on 2024-04-23 | trades: []
+ NMDC      move on 2022-10-27 | trades: [('2023-12-28', '2024-02-13', 0.14), ('2024-02-15', '2024-02-29', -0.081)]
+ PAYTM     move on 2024-02-02 | trades: []
+
+moves by date, dates with more than one:
+date
+2023-02-08                         [ADANIENT, PGIL]
+2024-06-04    [SAIL, BHEL, PFC, RECLTD, ADANIPORTS]
+moves by name, names with more than one:
+symbol
+ADANIENT                [2023-02-08, 2023-02-01, 2023-02-02]
+ALLCARGO                            [2023-04-18, 2021-11-02]
+IDEA        [2022-01-11, 2023-02-06, 2023-12-29, 2021-09-16]
+IOLCP                               [2022-04-01, 2022-03-09]
+PARAS                               [2024-06-18, 2021-10-18]
+ZEEL                    [2024-01-23, 2021-09-22, 2021-09-14]

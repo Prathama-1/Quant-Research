@@ -1,0 +1,47 @@
+# Survivorship bias in the Task 2 universe
+
+## The problem
+
+The 555 stocks are those liquid in October 2026, so membership looks into the future. Every stock in the file is still trading on the last date, 28 Jun 2024. Stocks that failed, merged or dried up after 2021 are missing, and so are IPOs that flopped. Stocks that were small in 2022 are included only because they later grew.
+
+## What it looks like in the data
+
+- **The whole universe beats the index.** A daily-rebalanced equal-weight portfolio of all listed names made +148% before costs in the window (Sharpe 2.48), against +44.6% for Nifty. Only 11.4% of names fell.
+- **Random stocks nearly reach the bar.** 15 random liquid names, monthly, average Sharpe 1.66 (std 0.36, 24 seeds). The firm's reference of 1.93 is less than one standard deviation above chance on this universe, so the Sharpe > 1.9 bar says little about skill.
+- **The less liquid a stock was in 2022, the more it rose.** This is the clearest signature. A stock with almost no trading in 2022 is only in the file if something large happened to it later.
+
+| 60-day median traded value, 28 Feb 2022 | Names | Mean return to Jun 2024 | Share that fell |
+|---|---|---|---|
+| Under Rs 1 cr | 22 | +359% | 0.0% |
+| Rs 1-5 cr | 79 | +298% | 3.8% |
+| Rs 5-10 cr | 70 | +249% | 11.4% |
+| Rs 10-25 cr | 86 | +150% | 14.0% |
+| Rs 25-50 cr | 61 | +122% | 14.8% |
+| Rs 50-100 cr | 66 | +110% | 10.6% |
+| Over Rs 100 cr | 104 | +76% | 15.4% |
+
+Part of this gradient is a real small-cap rally, and this data cannot separate the two.
+
+## How it affects my strategy
+
+The daily liquidity filter stops the strategy buying a stock before it qualifies. It cannot undo the fact that a stock which later qualifies is already known to survive. Three estimates, from three angles, all on the final `task2.py`. Rows are means over 4 rebalance offsets, except the ghost row, which is 12 random seeds at the official offset (official Sharpe 3.05):
+
+| Test | What it measures | Sharpe | CAGR | Max DD |
+|---|---|---|---|---|
+| As submitted, floor Rs 10 cr | | 2.97 | 46.6% | -10.9% |
+| Floor Rs 25 cr | Removes the names most exposed to the bias | 2.66 | 40.5% | -7.5% |
+| Floor Rs 50 cr | | 1.92 | 27.6% | -13.4% |
+| Floor Rs 100 cr | | 1.64 | 23.7% | -13.2% |
+| Every stock loses 29% a year | Removes most of the universe's tailwind | 1.57 | 16.1% | -7.8% |
+| Up to 60 collapsing "ghost" stocks added | The cost of holding failures | 2.99 to 3.05 | 47.6% to 48.4% | about -11% |
+
+- **The ghost test shows almost no cost.** The clones fall 60% to 90% and vanish, but the strategy rarely holds one when it falls and exits losers quickly. Direct losses from missing failures are small here.
+- **The larger effect is inflated winners.** The top 10 trades make 57% of net profit, and names like these are the ones the list flatters most. The liquidity gradient captures that.
+
+**My rough estimate:** survivorship flatters this strategy by something like 19 points of CAGR and 1.0 of Sharpe, the gap between the Rs 10 cr and Rs 50 cr floors. This is a guide, not a bound: the gap includes any genuine small-cap effect, which overstates the bias, and it ignores the bias still present above Rs 50 cr, which understates it. The hidden window has the same bias, because its list is fixed at its end, but a live portfolio would not.
+
+## How I would measure it properly
+
+1. **Build a point-in-time universe.** Use NSE daily bhavcopies, which include later-delisted and suspended securities, apply the same liquidity rule each day, and re-run the strategy. The difference from this universe is the bias.
+2. **Failing that, compare with a point-in-time benchmark.** Compare the equal-weight liquid universe with an index whose past membership is fixed, such as Nifty 500 Equal Weight, over the same window. The gap is the universe-level bias, which can be scaled by the strategy's exposure. The pack has no such index, so I have not done this.
+3. **Treat any delisted name as a loss.** In the point-in-time run, mark the last price of a delisted stock at a heavy discount rather than holding it at the last close, since an investor often cannot exit at that price.

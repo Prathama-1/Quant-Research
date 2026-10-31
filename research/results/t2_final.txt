@@ -1,0 +1,153 @@
+﻿=== official run {'cagr': 0.4803, 'total_return': 1.4885, 'max_dd': -0.1124, 'sharpe': 3.0495, 'calmar': 4.274, 'years': 2.3244, 'trades': 219, 'win_rate': 0.5434, 'avg_trade': 0.0678, 'time_in_market': 0.503, 'avg_hold_days': 18.9726, 'turnover_per_yr': 14.6878, 'trades_per_yr': 94.2164} {'2022': 0.24780685244437817, '2023': 0.6731763992235023, '2024': 0.19193616818111647}
+ deterministic: True
+
+=== monthly returns %
+2022-04-30     4.3
+2022-05-31     1.7
+2022-06-30     0.0
+2022-07-31     2.4
+2022-08-31     9.7
+2022-09-30     1.9
+2022-10-31     0.0
+2022-11-30     1.2
+2022-12-31     1.6
+2023-01-31     0.0
+2023-02-28     0.0
+2023-03-31     0.0
+2023-04-30     6.5
+2023-05-31     5.8
+2023-06-30    11.7
+2023-07-31    14.0
+2023-08-31     8.4
+2023-09-30    -0.8
+2023-10-31     1.2
+2023-11-30     3.5
+2023-12-31     3.6
+2024-01-31    18.3
+2024-02-29    -2.7
+2024-03-31     2.2
+2024-04-30    -2.9
+2024-05-31     1.5
+2024-06-30     2.9
+Freq: ME
+ positive months 19 of 27, worst -2.9%, best 18.3%
+
+=== best year removed {'best_year': 2023, 'cagr': 0.35410140103438015, 'sharpe': 2.4325438394722583, 'dd': -0.11236925394461306, 'total': 0.48730611833269366}
+
+=== top 10 trades: 56.9% of net P&L, 40.2% of gross profit; 219 trades in 130 names
+         symbol entry_date  exit_date    ret  days    pnl
+132       CUPID 2023-12-11 2024-02-07  1.023    40  0.140
+102    TITAGARH 2023-04-19 2023-10-10  1.457   119  0.121
+97       ZENTEC 2023-06-05 2023-09-27  0.957    79  0.090
+129        IRFC 2024-01-15 2024-01-23  0.586     6  0.088
+94         JBMA 2023-04-18 2023-09-12  0.969   102  0.081
+96   BECTORFOOD 2023-04-17 2023-09-12  0.798   103  0.067
+139  ANANDRATHI 2023-11-17 2024-02-13  0.500    59  0.065
+136       TRENT 2023-11-17 2024-02-13  0.461    59  0.060
+73         RVNL 2023-04-20 2023-05-05  0.649    10  0.054
+145       BSOFT 2023-11-16 2024-02-13  0.330    60  0.043
+         symbol entry_date  exit_date    ret  days    pnl
+200      VOLTAS 2024-04-26 2024-05-08 -0.113     7 -0.018
+192    INOXWIND 2024-04-25 2024-05-08 -0.121     8 -0.020
+164    KPIGREEN 2024-02-23 2024-02-29 -0.122     4 -0.020
+195  WEBELSOLAR 2024-04-24 2024-05-08 -0.162     9 -0.026
+98      TEXRAIL 2023-08-29 2023-10-10 -0.205    28 -0.026
+ by name: top 5 names 39.9%, top 10 names 64.2% of net
+ exits by reason: {'market': 219}
+ trade stats: win 54.3%, mean 6.78%, median 0.57%, best 145.7%, worst -20.5%, mean hold 19 days
+
+=== zero-cost CAGR 51.93%, net 48.03%, drag 3.90%/yr, turnover 14.7x/yr
+ 2x cost: Sharpe 2.85 CAGR 44.2% DD -12.7%
+ 3x cost: Sharpe 2.64 CAGR 40.5% DD -14.1%
+ 5x cost: Sharpe 2.23 CAGR 33.4% DD -16.8%
+
+=== scenarios, official offset
+ warm   Sharpe 0.44 CAGR 1.9% total 0.7% DD -2.8% in-mkt 9% trades/yr 58
+ tough  Sharpe 1.68 CAGR 17.0% total 44.0% DD -7.0% in-mkt 27% trades/yr 55
+ bear   Sharpe 0.23 CAGR 1.1% total 2.6% DD -7.0% in-mkt 10% trades/yr 60
+
+=== means over 4 rebalance offsets
+reference                      Sh  2.97 (min  2.83) DD  -10.9 CAGR  46.6 tr   94 tim  50% | tough Sh  1.57 DD   -7.8 CAGR  16.1 | warm    0.7% DD   -2.8
+ bear: Sh 0.20 DD -7.0% CAGR 0.9%
+
+=== 3x3+ sensitivity: breadth_min x lookback
+breadth 0.50 lookback 84       Sh  2.39 (min  2.22) DD   -8.8 CAGR  43.0 tr   90 tim  62% | tough Sh  1.18 DD  -13.1 CAGR  15.0 | warm  -16.1% DD  -16.1
+breadth 0.50 lookback 126      Sh  2.58 (min  2.39) DD   -9.9 CAGR  51.9 tr   78 tim  62% | tough Sh  1.75 DD  -11.7 CAGR  23.4 | warm   -8.3% DD  -13.3
+breadth 0.50 lookback 189      Sh  2.44 (min  2.32) DD  -11.2 CAGR  47.2 tr   68 tim  62% | tough Sh  1.15 DD  -12.3 CAGR  14.3 | warm   -1.0% DD   -1.4
+breadth 0.55 lookback 84       Sh  2.04 (min  1.93) DD  -12.4 CAGR  33.2 tr  104 tim  57% | tough Sh  1.01 DD   -9.5 CAGR  10.9 | warm   -7.2% DD   -8.4
+breadth 0.55 lookback 126      Sh  2.27 (min  2.10) DD  -14.4 CAGR  40.6 tr   96 tim  56% | tough Sh  1.62 DD  -10.4 CAGR  18.5 | warm   -1.4% DD   -6.9
+breadth 0.55 lookback 189      Sh  2.30 (min  2.20) DD  -15.5 CAGR  39.6 tr   84 tim  57% | tough Sh  1.27 DD  -10.3 CAGR  13.8 | warm    0.0% DD   -0.1
+breadth 0.60 lookback 84       Sh  2.46 (min  2.35) DD   -9.6 CAGR  35.5 tr  100 tim  51% | tough Sh  0.97 DD   -6.9 CAGR   9.2 | warm   -5.8% DD   -6.7
+breadth 0.60 lookback 126      Sh  2.97 (min  2.83) DD  -10.9 CAGR  46.6 tr   94 tim  50% | tough Sh  1.57 DD   -7.8 CAGR  16.1 | warm    0.7% DD   -2.8
+breadth 0.60 lookback 189      Sh  2.68 (min  2.58) DD  -10.6 CAGR  40.5 tr   82 tim  50% | tough Sh  1.35 DD   -9.2 CAGR  13.4 | warm    0.0% DD    0.0
+breadth 0.65 lookback 84       Sh  2.48 (min  2.36) DD  -12.7 CAGR  31.6 tr  106 tim  44% | tough Sh  0.80 DD   -5.2 CAGR   5.9 | warm   -5.5% DD   -6.0
+breadth 0.65 lookback 126      Sh  2.79 (min  2.68) DD  -13.9 CAGR  40.0 tr  100 tim  43% | tough Sh  1.48 DD   -5.4 CAGR  11.3 | warm   -1.3% DD   -1.6
+breadth 0.65 lookback 189      Sh  2.56 (min  2.45) DD  -12.8 CAGR  34.4 tr   86 tim  43% | tough Sh  1.38 DD   -9.0 CAGR  11.6 | warm    0.0% DD    0.0
+breadth 0.70 lookback 84       Sh  2.68 (min  2.60) DD   -6.9 CAGR  28.6 tr   90 tim  33% | tough Sh -0.40 DD   -9.2 CAGR  -2.3 | warm   -5.3% DD   -5.4
+breadth 0.70 lookback 126      Sh  3.33 (min  3.29) DD   -6.6 CAGR  36.8 tr   78 tim  33% | tough Sh  0.78 DD   -4.9 CAGR   4.2 | warm   -0.5% DD   -1.2
+breadth 0.70 lookback 189      Sh  2.99 (min  2.92) DD   -6.9 CAGR  33.7 tr   71 tim  33% | tough Sh  0.53 DD   -6.4 CAGR   3.0 | warm    0.0% DD    0.0
+
+=== one at a time
+top_k = 8                      Sh  2.89 (min  2.48) DD   -9.5 CAGR  54.5 tr   49 tim  51% | tough Sh  1.29 DD   -9.9 CAGR  15.1 | warm   -2.1% DD   -5.3
+top_k = 10                     Sh  3.01 (min  2.83) DD  -11.0 CAGR  53.9 tr   60 tim  51% | tough Sh  1.59 DD   -8.0 CAGR  18.1 | warm    0.6% DD   -3.2
+top_k = 12                     Sh  2.96 (min  2.91) DD  -10.0 CAGR  49.5 tr   72 tim  51% | tough Sh  1.52 DD   -8.4 CAGR  16.4 | warm   -0.3% DD   -3.8
+top_k = 15                     Sh  2.97 (min  2.83) DD  -10.9 CAGR  46.6 tr   94 tim  50% | tough Sh  1.57 DD   -7.8 CAGR  16.1 | warm    0.7% DD   -2.8
+sell_rank = 20                 Sh  3.06 (min  3.00) DD   -9.8 CAGR  50.1 tr  109 tim  50% | tough Sh  1.55 DD   -8.1 CAGR  15.7 | warm    0.7% DD   -2.8
+sell_rank = 30                 Sh  2.99 (min  2.88) DD  -10.6 CAGR  47.6 tr   99 tim  50% | tough Sh  1.51 DD   -7.6 CAGR  15.2 | warm    0.7% DD   -2.8
+sell_rank = 40                 Sh  2.97 (min  2.83) DD  -10.9 CAGR  46.6 tr   94 tim  50% | tough Sh  1.57 DD   -7.8 CAGR  16.1 | warm    0.7% DD   -2.8
+sell_rank = 60                 Sh  2.96 (min  2.83) DD  -11.3 CAGR  46.7 tr   88 tim  51% | tough Sh  1.50 DD   -8.1 CAGR  15.4 | warm    0.7% DD   -2.8
+sell_rank = 90                 Sh  3.00 (min  2.98) DD  -11.0 CAGR  47.2 tr   85 tim  51% | tough Sh  1.41 DD   -8.2 CAGR  14.0 | warm    0.7% DD   -2.8
+max_vol = 0.45                 Sh  2.50 (min  2.35) DD   -8.5 CAGR  31.8 tr   96 tim  51% | tough Sh  1.05 DD   -5.7 CAGR   8.9 | warm   -2.5% DD   -2.6
+max_vol = 0.55                 Sh  2.84 (min  2.74) DD   -9.3 CAGR  42.0 tr   93 tim  50% | tough Sh  1.53 DD   -7.9 CAGR  14.9 | warm    1.4% DD   -2.4
+max_vol = 0.65                 Sh  2.97 (min  2.83) DD  -10.9 CAGR  46.6 tr   94 tim  50% | tough Sh  1.57 DD   -7.8 CAGR  16.1 | warm    0.7% DD   -2.8
+max_vol = 0.8                  Sh  2.82 (min  2.64) DD  -10.5 CAGR  44.2 tr   93 tim  50% | tough Sh  1.45 DD   -8.2 CAGR  14.6 | warm    1.6% DD   -2.5
+max_vol = 9.9                  Sh  2.76 (min  2.65) DD  -10.5 CAGR  42.9 tr   93 tim  50% | tough Sh  1.49 DD   -8.2 CAGR  15.1 | warm    1.6% DD   -2.5
+breakout_days = 1              Sh  2.95 (min  2.82) DD  -12.7 CAGR  47.4 tr  106 tim  55% | tough Sh  1.13 DD  -13.6 CAGR  12.1 | warm   -5.4% DD   -6.9
+breakout_days = 5              Sh  3.02 (min  2.87) DD  -11.5 CAGR  47.7 tr   98 tim  52% | tough Sh  1.36 DD   -8.8 CAGR  14.4 | warm   -0.9% DD   -3.7
+breakout_days = 10             Sh  2.97 (min  2.83) DD  -10.9 CAGR  46.6 tr   94 tim  50% | tough Sh  1.57 DD   -7.8 CAGR  16.1 | warm    0.7% DD   -2.8
+breakout_days = 20             Sh  2.91 (min  2.77) DD  -10.4 CAGR  44.9 tr   89 tim  49% | tough Sh  1.51 DD   -8.1 CAGR  15.1 | warm   -0.5% DD   -2.7
+breakout_days = 40             Sh  2.98 (min  2.71) DD   -9.5 CAGR  45.7 tr   84 tim  48% | tough Sh  1.46 DD   -8.0 CAGR  14.4 | warm   -1.0% DD   -2.8
+REVIEW_EVERY = 5               Sh  2.87 (min  2.82) DD  -10.9 CAGR  44.2 tr   97 tim  50% | tough Sh  1.69 DD   -7.2 CAGR  17.1 | warm    0.7% DD   -2.8
+REVIEW_EVERY = 10              Sh  2.97 (min  2.83) DD  -10.9 CAGR  46.6 tr   94 tim  50% | tough Sh  1.57 DD   -7.8 CAGR  16.1 | warm    0.7% DD   -2.8
+REVIEW_EVERY = 21              Sh  3.05 (min  2.92) DD  -10.6 CAGR  48.2 tr   89 tim  51% | tough Sh  1.48 DD   -8.2 CAGR  15.0 | warm    0.7% DD   -2.8
+MIN_TRADED_VALUE = 100000000.0 Sh  2.97 (min  2.83) DD  -10.9 CAGR  46.6 tr   94 tim  50% | tough Sh  1.57 DD   -7.8 CAGR  16.1 | warm    0.7% DD   -2.8
+MIN_TRADED_VALUE = 150000000.0 Sh  2.83 (min  2.75) DD   -9.1 CAGR  44.0 tr   93 tim  50% | tough Sh  1.21 DD   -8.4 CAGR  11.8 | warm   -0.0% DD   -2.3
+MIN_TRADED_VALUE = 250000000.0 Sh  2.66 (min  2.50) DD   -7.5 CAGR  40.5 tr   92 tim  51% | tough Sh  1.20 DD   -7.8 CAGR  11.1 | warm   -2.5% DD   -3.4
+MIN_TRADED_VALUE = 500000000.0 Sh  1.92 (min  1.73) DD  -13.4 CAGR  27.6 tr   90 tim  53% | tough Sh  1.06 DD   -9.8 CAGR  10.6 | warm    1.4% DD   -1.6
+MIN_TRADED_VALUE = 1000000000.0 Sh  1.64 (min  1.54) DD  -13.2 CAGR  23.7 tr   96 tim  54% | tough Sh  0.73 DD  -14.8 CAGR   7.0 | warm   -0.5% DD   -1.2
+MIN_TRADED_VALUE = 2000000000.0 Sh  1.64 (min  1.61) DD  -11.2 CAGR  26.0 tr   66 tim  56% | tough Sh  0.32 DD   -7.6 CAGR   2.4 | warm   -2.5% DD   -3.6
+BREADTH_MA = 20                Sh  2.75 (min  2.57) DD   -6.7 CAGR  35.2 tr  130 tim  42% | tough Sh  0.75 DD  -12.6 CAGR   6.4 | warm   -1.3% DD   -3.9
+BREADTH_MA = 30                Sh  2.95 (min  2.79) DD  -10.6 CAGR  44.6 tr  105 tim  46% | tough Sh  0.74 DD   -8.8 CAGR   5.7 | warm   -4.7% DD   -6.3
+BREADTH_MA = 50                Sh  2.97 (min  2.83) DD  -10.9 CAGR  46.6 tr   94 tim  50% | tough Sh  1.57 DD   -7.8 CAGR  16.1 | warm    0.7% DD   -2.8
+BREADTH_MA = 75                Sh  2.69 (min  2.63) DD   -9.9 CAGR  42.5 tr   83 tim  52% | tough Sh  1.21 DD   -9.4 CAGR  13.0 | warm    2.1% DD   -3.4
+BREADTH_MA = 100               Sh  2.41 (min  2.38) DD  -13.4 CAGR  40.5 tr   66 tim  59% | tough Sh  1.55 DD   -8.6 CAGR  17.1 | warm    4.8% DD   -3.3
+VOL_DAYS = 60                  Sh  2.90 (min  2.78) DD  -10.3 CAGR  45.6 tr   94 tim  50% | tough Sh  1.67 DD   -8.5 CAGR  17.0 | warm    0.9% DD   -2.5
+VOL_DAYS = 120                 Sh  2.97 (min  2.83) DD  -10.9 CAGR  46.6 tr   94 tim  50% | tough Sh  1.57 DD   -7.8 CAGR  16.1 | warm    0.7% DD   -2.8
+VOL_DAYS = 250                 Sh  2.76 (min  2.68) DD  -10.5 CAGR  43.0 tr   92 tim  50% | tough Sh  1.50 DD   -8.2 CAGR  15.3 | warm    1.6% DD   -2.5
+JUMP = 0.3                     Sh  2.98 (min  2.84) DD  -10.2 CAGR  46.8 tr   94 tim  50% | tough Sh  1.57 DD   -7.8 CAGR  16.1 | warm    0.7% DD   -2.8
+JUMP = 0.45                    Sh  2.97 (min  2.83) DD  -10.9 CAGR  46.6 tr   94 tim  50% | tough Sh  1.57 DD   -7.8 CAGR  16.1 | warm    0.7% DD   -2.8
+JUMP = 0.6                     Sh  2.97 (min  2.83) DD  -10.9 CAGR  46.6 tr   94 tim  50% | tough Sh  1.57 DD   -7.8 CAGR  16.1 | warm    0.7% DD   -2.8
+JUMP = 9.9                     Sh  2.97 (min  2.83) DD  -10.9 CAGR  46.6 tr   94 tim  50% | tough Sh  1.57 DD   -7.8 CAGR  16.1 | warm    0.7% DD   -2.8
+JUMP_COOLOFF = 0               Sh  2.97 (min  2.83) DD  -10.9 CAGR  46.6 tr   94 tim  50% | tough Sh  1.57 DD   -7.8 CAGR  16.1 | warm    0.7% DD   -2.8
+JUMP_COOLOFF = 10              Sh  2.97 (min  2.83) DD  -10.9 CAGR  46.6 tr   94 tim  50% | tough Sh  1.57 DD   -7.8 CAGR  16.1 | warm    0.7% DD   -2.8
+JUMP_COOLOFF = 40              Sh  2.97 (min  2.83) DD  -10.9 CAGR  46.6 tr   94 tim  50% | tough Sh  1.57 DD   -7.8 CAGR  16.1 | warm    0.7% DD   -2.8
+
+=== no regime at all (breadth_min 0): what the filter adds
+breadth_min 0                  Sh  2.20 (min  2.05) DD  -21.3 CAGR  59.8 tr   53 tim  95% | tough Sh  0.92 DD  -28.1 CAGR  20.4 | warm   -5.3% DD  -18.5
+
+=== random 70% sub-universes (20 seeds)
+         sh   cagr     dd      tr
+mean  2.838  0.432 -0.107  89.140
+std   0.247  0.046  0.019   4.968
+min   2.314  0.343 -0.142  79.589
+50%   2.828  0.423 -0.107  89.699
+max   3.274  0.522 -0.079  96.798
+
+=== survivorship: inject ghost stocks that look like real names, then fall 70% (or 90%) over 60 days and vanish
+ 15 ghosts, fall 70%: Sharpe 3.03 CAGR 47.7% DD -11.1% (worst -11.3%), ghost trades per run 1.7
+ 30 ghosts, fall 70%: Sharpe 3.05 CAGR 48.0% DD -11.1% (worst -11.2%), ghost trades per run 2.9
+ 60 ghosts, fall 70%: Sharpe 3.05 CAGR 48.4% DD -11.2% (worst -11.6%), ghost trades per run 8.5
+ 30 ghosts, fall 90%: Sharpe 3.05 CAGR 48.0% DD -11.1% (worst -11.2%), ghost trades per run 2.9
+ 60 ghosts, fall 90%: Sharpe 3.04 CAGR 48.3% DD -11.2% (worst -11.6%), ghost trades per run 8.5
+
+minutes 15.2

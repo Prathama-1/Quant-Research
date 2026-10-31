@@ -1,0 +1,12 @@
+# The firm's pack: the repo is public and the brief says not to redistribute these with the submission
+data/
+harness_public.py
+PACK_README.md
+task1_template.py
+task2_template.py
+
+__pycache__/
+*.pyc
+.venv/
+*.zip
+report/figures/
