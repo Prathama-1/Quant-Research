@@ -3,7 +3,7 @@ read by date for speed; the final task2.py recomputes them from `hist` and is ch
 
 Each config is judged on:
   eval   official window, 2 Mar 2022 to 30 Jun 2024
-  warm   Oct 2021 to Feb 2022, a weak stretch before the window and not used for tuning
+  warm   Oct 2021 to Feb 2022, a weak stretch before the window. Not a scored result, but it did inform design choices
   tough  drift-stripped data: every stock loses TOUGH_G per year so the equal-weight universe earns about 10% a year rather than
          about 47%, and Nifty about 5%. This removes most of the survivorship and bull-market tailwind. Selection and risk logic
          have to earn the return.

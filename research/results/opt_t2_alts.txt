@@ -1,0 +1,7 @@
+﻿Submitted                            Sharpe 2.97 DD -10.9% CAGR 46.6% | tough 1.57 DD -7.8% CAGR 16.1% | warm 0.7% | Feb-Jun 24 0.6% | outside Apr23-Jan24 Sharpe 1.48
+Breadth threshold 0.70               Sharpe 3.33 DD -6.6% CAGR 36.8% | tough 0.78 DD -4.9% CAGR 4.2% | warm -0.5% | Feb-Jun 24 10.2% | outside Apr23-Jan24 Sharpe 2.88 | diff vs submitted 95% CI -0.65 to +1.45, P(better) 75%
+Breadth threshold 0.65               Sharpe 2.79 DD -13.9% CAGR 40.0% | tough 1.48 DD -5.4% CAGR 11.3% | warm -1.3% | Feb-Jun 24 -5.0% | outside Apr23-Jan24 Sharpe 1.13 | diff vs submitted 95% CI -0.72 to +0.33, P(better) 22%
+Skip-month signal, threshold 0.65    Sharpe 3.13 DD -11.7% CAGR 47.5% | tough 2.23 DD -5.0% CAGR 18.3% | warm -2.1% | Feb-Jun 24 -4.9% | outside Apr23-Jan24 Sharpe 1.23 | diff vs submitted 95% CI -0.55 to +0.72, P(better) 66%
+Skip-month signal, threshold 0.60    Sharpe 3.27 DD -10.0% CAGR 55.6% | tough 1.66 DD -10.5% CAGR 17.9% | warm -0.1% | Feb-Jun 24 -3.1% | outside Apr23-Jan24 Sharpe 1.59 | diff vs submitted 95% CI -0.24 to +0.79, P(better) 86%
+10 positions                         Sharpe 3.01 DD -11.0% CAGR 53.9% | tough 1.59 DD -8.0% CAGR 18.1% | warm 0.6% | Feb-Jun 24 0.9% | outside Apr23-Jan24 Sharpe 1.61 | diff vs submitted 95% CI -0.27 to +0.38, P(better) 63%
+12 positions, sell rank 20           Sharpe 3.09 DD -9.4% CAGR 53.6% | tough 1.52 DD -8.1% CAGR 16.5% | warm -0.3% | Feb-Jun 24 3.4% | outside Apr23-Jan24 Sharpe 1.85 | diff vs submitted 95% CI -0.18 to +0.42, P(better) 80%

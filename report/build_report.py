@@ -28,7 +28,6 @@ import harness_public as H  # noqa: E402
 
 T1 = json.load(open(os.path.join(RES, 't1_final.json')))
 T2 = json.load(open(os.path.join(RES, 't2_final.json')))
-CK = json.load(open(os.path.join(RES, 't2_checks.json')))
 DC = json.load(open(os.path.join(RES, 't_decomp.json')))
 
 # ---------------------------------------------------------------------------- palette (validated: scripts/validate_palette.js, surface #ffffff)
@@ -108,21 +107,6 @@ def chart_t2():
     return finish(fig, 't2_equity')
 
 
-def chart_buckets():
-    b = CK['buckets']
-    labs = ['Under 1', '1-5', '5-10', '10-25', '25-50', '50-100', 'Over 100']
-    v = [x['mean'] * 100 for x in b]
-    fig, ax = plt.subplots(figsize=(W_IN, 1.35))
-    ax.bar(range(len(v)), v, width=.55, color=BLUE)
-    for i, x in enumerate(v):
-        ax.text(i, x + 8, '+%.0f%%' % x, ha='center', va='bottom', color=INK2, fontsize=7.5)
-    ax.set_xticks(range(len(v))); ax.set_xticklabels(labs)
-    ax.set_ylabel('Mean return, %'); ax.set_ylim(0, max(v) * 1.2)
-    ax.set_xlabel('60-day median traded value on 28 Feb 2022, Rs crore', labelpad=1.5)
-    ax.tick_params(axis='x', length=0)
-    return finish(fig, 'buckets')
-
-
 # ---------------------------------------------------------------------------- formatting
 pdfmetrics.registerFont(TTFont('Cal', r'C:\Windows\Fonts\calibri.ttf'))
 pdfmetrics.registerFont(TTFont('Cal-B', r'C:\Windows\Fonts\calibrib.ttf'))
@@ -182,7 +166,7 @@ def footer(c, d):
 def build():
     bars = H.load_bars(os.path.join(ROOT, 'data', 'nifty50_15min_train_2017-04-03_2022-01-31.csv'))
     ex = H.load_expiries(os.path.join(ROOT, 'data', 'nifty_monthly_expiries_2017-01_2022-01.csv'))
-    f_legs, f_t1, f_t2, f_b = chart_legs(bars), chart_t1(bars, ex), chart_t2(), chart_buckets()
+    f_legs, f_t1, f_t2 = chart_legs(bars), chart_t1(bars, ex), chart_t2()
 
     b1, st1, b2, off = T1['base'], T1['stress'], T2['base'], T2['offsets']
     S = []
@@ -203,7 +187,7 @@ def build():
     S.append(P('Task 1: long overnight, in healthy markets only', H1))
     S.append(P('<b>Idea.</b> Nifty\'s return arrives while the market is shut. From 2017 to Jan 2022 the overnight gap has a Sharpe of +3.4 (t = 7.5) and the open-to-close session -1.6 (t = -3.4), with those signs in every full year. '
                'The Task 2 daily file confirms it past the 15-minute data: +2.6 and -0.8 for Feb 2022 to Jun 2024. The 09:15 bar alone loses 6.5 bps a day (t = -6.2).'))
-    S.append(P('<b>Why it should work.</b> Overnight holders carry gap risk they cannot hedge or exit while the cash market is shut, and intraday leverage must be closed by the end of the day, so overnight capital is scarce and gets paid. '
+    S.append(P('<b>Why it should work.</b> Overnight holders carry gap risk that is hard to hedge or exit while the cash market is shut, and intraday leverage is normally closed by the end of the day, so overnight capital should be scarce and get paid. '
                'Buying pressure at the open then lifts the first print, which fades (Berkman et al. 2012; Lou, Polk and Skouras 2019). The premium is thin and the tail is large when the market falls, so I only take it when the market is calm and rising.'))
     S.append(P('<b>Rules.</b> At the close of the 14:30 bar, go long if (1) price is above its 20-day average, (2) the session so far is at least -0.25%, (3) 20-day realised vol is under 35%, and (4) the last 120 paper trades averaged at least 7 bps, which is the round-trip cost plus carry. '
                'Fill at 14:45, exit at the next morning\'s open, otherwise stay flat. Never short: shorts pay the gap, and long-short lost to long-flat in 10 of 11 trend configs. Deciding at 14:30 still fills before the close with a 2-bar delay. '
@@ -292,7 +276,7 @@ def build():
                ['Bear: universe about -10% a year', pct(off['bear']['cagr']), pct(off['bear']['dd']), num(off['bear']['sh'])],
                ['Oct 2021 to Feb 2022, before the window*', pct(sc['warm']['total']), pct(sc['warm']['dd']), num(sc['warm']['sharpe'])]]
     S.append(table(t2_rows, [COLW - 34 - 36 - 56, 34, 36, 56], bold_rows=(1,)))
-    S.append(P('*Total return, not CAGR. A weak stretch that was never used for tuning. The liquidity floor, tough and bear rows are means over 4 offsets.', SMALL))
+    S.append(P('*Total return, not CAGR, and not a scored result, as the brief reserves 2021 for indicator warm-up. It did inform my design choices: see Checks on page 3. The liquidity floor, tough and bear rows are means over 4 offsets.', SMALL))
     y = b2['yearly']
     S.append(table([['Year', '2022 (Mar on)', '2023', '2024 (to Jun)'], ['Return', pct(y['2022']), pct(y['2023']), pct(y['2024'])]], [40, 62, 40, COLW - 142]))
     S.append(Spacer(1, 3))
@@ -346,41 +330,45 @@ def build():
     S.append(Spacer(1, 1.5))
     S.append(P('*Module constant, beyond the six in PARAMS.', SMALL))
     S.append(P('What would break it', H2))
-    S.append(P('<b>Survivorship</b> is the largest risk, covered on the next page. '
+    S.append(P('<b>Survivorship</b> is the largest risk: a Rs 50 cr floor already takes Sharpe to %s, and a live portfolio has no list picked with hindsight. See <font name="Cal-I">survivorship.txt</font>. ' % num(fm[5e8]['sh']) +
                '<b>Slow reaction.</b> The filter needs speed: if the signal arrives 1, 2, 3 or 10 days late, Sharpe is 2.85, 2.50, 1.77 and 1.60. '
-               '<b>Choppy markets.</b> Breadth hovering near 60% means selling lows and rebuying highs at 0.4% a round trip. '
+               '<b>Choppy markets.</b> Breadth hovering near 60% means selling lows and rebuying highs at 0.4% a round trip. This already happened: from Feb to Jun 2024 the strategy made +0.7% against +17.8% for the universe, with 14 filter flips and 36% winning trades. Only 5% of the 800 settings on page 3 made over 10% in those months, so tuning does not fix it. '
+               '<b>A less one-way market.</b> Apr 2023 to Jan 2024 gave 75% of the log return, when the universe alone scored Sharpe 5.65. Outside that stretch the strategy\'s Sharpe is 1.42 and its yearly return 16.8%. '
                '<b>Loss of leadership.</b> With no multi-baggers to catch, the top-10 share above suggests much of the return goes. '
                '<b>Corporate actions.</b> An event like ABFRL or STAR on a held name costs about 3% of equity at 1/15 weight, and nothing can see it coming. '
                '<b>Capacity.</b> The Rs 10 cr floor keeps small names eligible, and 0.2% a side may understate the cost of trading them in size.'))
     S.append(PageBreak())
 
     # ---------------------------------------------------------------- page 3
-    S.append(P('Survivorship bias in the Task 2 universe', H1))
-    S.append(P('The list is the set of stocks liquid in Oct 2026, so membership looks into the future: all 555 names are still trading on the last date, and failures, mergers and flopped IPOs are missing. It shows up three ways. '
-               'An equal-weight portfolio of everything made +148% before costs against +44.6% for Nifty, with only 11.4% of names falling. 15 random stocks score Sharpe 1.66 (std 0.36), so the firm\'s reference of 1.93 is under one standard deviation above chance. '
-               'And the less liquid a stock was in 2022, the more it later rose, because a stock with almost no trading then is only here if something large happened to it.'))
-    S.append(P('Mean return to Jun 2024, by liquidity on 28 Feb 2022', CAP)); S.append(img(f_b))
-    fl_ = fm
-    S.append(P('<b>Effect on the strategy.</b> Raising the liquidity floor from Rs 10 cr to Rs 25, 50 and 100 cr takes Sharpe from %s to %s, %s and %s, and CAGR from %s to %s, %s and %s. That gap of about 19 points of CAGR and 1.0 of Sharpe at Rs 50 cr is my rough estimate of the flattery. It is a guide, not a bound: '
-               'it includes any genuine small-cap effect, and it ignores the bias remaining above Rs 50 cr. Injecting up to 60 failing clones of real stocks barely moved the result (Sharpe %s to %s), so the direct cost of holding failures is small, because losers exit quickly. The larger effect is inflated winners.' % (
-                   num(fl_[1e8]['sh']), num(fl_[2.5e8]['sh']), num(fl_[5e8]['sh']), num(fl_[1e9]['sh']), pct(fl_[1e8]['cagr']), pct(fl_[2.5e8]['cagr']), pct(fl_[5e8]['cagr']), pct(fl_[1e9]['cagr']),
-                   num(min(min(x['sh'] for x in T2['ghost']), min(x['sh'] for x in CK['sudden']))), num(max(max(x['sh'] for x in T2['ghost']), max(x['sh'] for x in CK['sudden']))))))
-    S.append(P('<b>Measuring it properly.</b> Rebuild a point-in-time universe from NSE bhavcopies, including later-delisted names, apply the same liquidity rule each day, and re-run. Failing that, compare the equal-weight universe with an index whose past membership is fixed, such as Nifty 500 Equal Weight. Details are in <font name="Cal-I">survivorship_note.md</font>.'))
+    S.append(P('Would more tuning help?', H1))
+    S.append(P('No. I tested 800 settings per task with cross-validation (CSCV, Bailey et al.): pick the best on half the data, score it on the other half, and repeat for every split.'))
+    S.append(table([['Sharpe', 'Task 1, all', 'Task 1, no 14:45', 'Task 2'],
+                    ['Best settings, on the half used to pick them', '3.78', '3.46', '3.72'],
+                    ['Same settings, on the unseen half', '2.97', '2.35', '2.84'],
+                    ['Submitted settings', '2.95', '2.95', '3.01'],
+                    ['How often the best settings beat submitted', '54%', '5%', '47%']],
+                   [COLW - 3 * 42, 42, 42, 42]))
+    S.append(Spacer(1, 3))
+    S.append(P('I chose the submitted settings after seeing this data, so their row is flattered. The fair reading is the fall of about 1 Sharpe from picking winners, and I expect mine to fall on hidden data too.'))
+    S.append(P('<b>Task 1 trade-off.</b> Deciding at 14:45 gives Sharpe 3.57, worst loss -3.7% and 25.1% a year, a significant gain (95% CI +0.22 to +1.03). But a 2-bar delay then scores -3.37, because the fill misses the overnight gap. I kept 14:30 for that reason. '
+               '<b>Task 2 alternatives.</b> None is significantly better (means of 4 offsets, against 2.97): a skip-month signal 3.27, 12 positions with sell rank 20 3.09, and breadth 0.70 3.33, which falls to 0.78 in the tough case.'))
     S.append(FrameBreak())
     S.append(P('Checks', H1))
     la = T1['lookahead']
     S.append(P('<b>No look-ahead.</b> The harness check passes. On Task 1, %d further truncation cuts gave no mismatches, and corrupting all prices after a cut changed nothing before it. Task 2 only ever sees <font name="Cal-I">hist</font>.' % la['cuts']))
     S.append(P('<b>Reproducible.</b> Deterministic, with no dates in the code. Results are identical to 10 decimals on pandas 3.0.2 with numpy 2.4.4 and on pandas 2.2.3 with numpy 1.26.4. Task 1 runs in under 1 second and Task 2 in about 5 seconds, including on a test window as long as the hidden one.'))
     S.append(P('<b>Robust to odd data.</b> Both handle short sessions and cold starts: with too little history they stay flat. Task 2 also handles missing prices on a held stock and injected price shocks.'))
+    S.append(P('<b>What I looked at beyond the scored windows.</b> The brief reserves 2021 for indicator warm-up. The scored runs trade nothing before the window, but in research I also ran Task 2 over Oct 2021 to Feb 2022 as a weak-market check, and that and the tough case informed its design, so neither is independent evidence. '
+               'Task 1\'s later-period check uses the pack\'s daily Nifty file for Feb 2022 to Jun 2024, which overlaps the hidden window, so that stretch is not unseen by me.'))
     S.append(P('<b>Selection effects.</b> %d Task 1 and %s Task 2 configs are logged. Designs were compared by averages across many configs, not by the best row. The same discipline is why I rejected the highest in-sample Task 2 threshold and why Task 2 tables average over rebalance offsets: moving the rebalance day alone shifts Sharpe by about 0.3.' % (DC['t1_dsr']['n_trials'], format(DC['t2_dsr']['n_trials'], ','))))
     S.append(P('Notes on the brief', H1))
     S.append(P('<b>Parameter limit.</b> The email allows more than 6 parameters, but <font name="Cal-I">check_params</font> rejects them. So PARAMS has 6 and the others are module constants, listed with their tests above. '
                '<b>Universe size.</b> The email says about 585 stocks, while the data and README have 555. '
                '<b>Undisclosed anomaly.</b> NMDC jumps +85.7% on 2022-10-27. The README lists only drops.'))
-    S.append(P('<b>Other files.</b> <font name="Cal-I">failed_ideas.md</font> has what did not work, with numbers. Research code and all logged runs are at github.com/Prathama-1/Quant-Research, without the firm\'s data or harness.'))
+    S.append(P('<b>Other files.</b> <font name="Cal-I">failed_ideas.md</font> has what did not work, with numbers, and <font name="Cal-I">survivorship.txt</font> has the universe bias note. Research code and all logged runs are at github.com/Prathama-1/Quant-Research, without the firm\'s data or harness.'))
     S.append(P('With more time', H1))
     S.append(P('<b>Nifty futures bars.</b> How much of the spot gap can a futures trade actually capture? This is the largest open question in Task 1, and the data would answer it directly.'))
-    S.append(P('<b>A point-in-time stock universe.</b> This is the largest open question in Task 2, as set out on the left.'))
+    S.append(P('<b>A point-in-time stock universe.</b> This is the largest open question in Task 2, as set out in <font name="Cal-I">survivorship.txt</font>.'))
     S.append(P('<b>A longer history.</b> Task 1\'s filter has been tested on one crash and one recovery, and Task 2 on a window that is mostly a bull market. I would want both tested through a long bear market such as 2008 before trusting them with capital.'))
 
     doc = BaseDocTemplate(OUT_PDF, pagesize=A4, leftMargin=L, rightMargin=R, topMargin=Tm, bottomMargin=Bm, title='Nifty overnight timing and NSE momentum', author='Prathama Bharadwaj')

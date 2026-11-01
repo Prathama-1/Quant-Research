@@ -1,0 +1,69 @@
+﻿=== Task 1
+PASS  Beats the bar: Sharpe > 1.0                                    2.95
+PASS  Beats the bar: max drawdown better than -15%                   -4.7%
+PASS  Positions only -1, 0, +1 and never NaN                         [0.0, 1.0]
+PASS  No position in the first 200 bars                              
+PASS  Harness look-ahead check passes                                
+      for the record: 1-bar delay 2.61, 2-bar delay 1.94, 2x costs 1.78
+
+=== Task 2
+PASS  Beats the bar: Sharpe > 1.9                                    3.05
+PASS  Beats the bar: max drawdown better than -25%                   -11.2%
+PASS  Scored window starts 2 Mar 2022 and ends 28 Jun 2024           
+PASS  First orders() call is on the last day before the window       2022-02-28
+PASS  orders() never receives data past its own date                 
+PASS  At most 15 positions                                           max 15
+PASS  No more than 15% of equity at entry                            max 6.67%
+PASS  No more than 15% of equity per name at any close (email rule)  max 11.76% ('CUPID', '2024-01-17'), 0 day-positions over
+PASS  No leverage: invested share never above 100%                   max 100.0%, min cash 0.0000
+PASS  No adding to an open position                                  
+PASS  Only valid order types, long only                              
+      for the record: top days over 15%: []
+PASS  No look-ahead: cutting future data changes nothing before the cut 3 cuts, 0 days differ
+PASS  No look-ahead: corrupting future prices changes nothing before 
+PASS  Deterministic: two runs identical                              
+
+=== Both tasks, code rules
+PASS  Runs in under 10 minutes                                       Task 1 0.0s, Task 2 8.2s
+PASS  Task 1 deterministic: two runs identical                       
+PASS  task1: at most 6 entries in PARAMS                             6
+PASS  task1: parses as Python 3.9, imports only numpy and pandas     ['numpy', 'pandas']
+PASS  task1: no dates in code                                        
+PASS  task1: no file, network or random use                          
+PASS  task1: no stock named in the logic                             
+PASS  task1: has a module description and PARAMS comments            
+PASS  task2: at most 6 entries in PARAMS                             6
+PASS  task2: parses as Python 3.9, imports only numpy and pandas     ['numpy']
+PASS  task2: no dates in code                                        
+PASS  task2: no file, network or random use                          
+PASS  task2: no stock named in the logic                             
+PASS  task2: has a module description and PARAMS comments            
+PASS  Harness identical to the firm's copy                           
+
+=== Submission zip
+PASS  Exactly the required files                                     ['task1.py', 'task2.py', 'report.pdf', 'failed_ideas.md', 'survivorship_note.md']
+PASS  No data folder or harness                                      
+PASS  Zip copies match the current files                             
+PASS  Size is small enough to email                                  271 KB
+
+=== failed_ideas.md
+PASS  At least 3 ideas                                               30 table rows
+PASS  No claim that the warm window was unused                       
+
+=== report.pdf
+PASS  At most 3 pages                                                3 pages
+PASS  Report covers: Idea and economic reasoning                     
+PASS  Report covers: Sensitivity tables                              
+PASS  Report covers: Year-wise results                               
+PASS  Report covers: Turnover and cost drag                          
+PASS  Report covers: Best year removed                               
+PASS  Report covers: Share of profit from top 10 trades              
+PASS  Report covers: What would break it                             
+PASS  Report covers: 1-bar and 2-bar delay                           
+PASS  Report covers: 2x costs                                        
+PASS  Report covers: Parameters with tested ranges                   
+PASS  Report covers: Survivorship discussion                         
+PASS  Report covers: Disclosure of the 2021 window                   
+PASS  No false "never used for tuning" claim                         
+
+54 of 54 checks passed
