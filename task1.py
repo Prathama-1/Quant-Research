@@ -2,8 +2,8 @@
 Task 1: Nifty 50 futures, overnight premium with a trend and risk filter.
 
 Idea. Almost all of Nifty's return arrives while the market is shut: from 2017 to Jan 2022 the overnight gap has a Sharpe of
-+3.4 and the open-to-close session -1.6. Holding overnight is paid because the risk cannot be hedged or exited while the cash
-market is shut, and intraday leverage has to be closed by the end of the day. The premium is thin and the tail is large when
++3.4 and the open-to-close session -1.6. Holding overnight should be paid because the risk is hard to hedge or exit while the
+cash market is shut, and intraday leverage is normally closed by the end of the day. The premium is thin and the tail is large when
 the market is falling, so the strategy only takes the risk when the market is trending up, today's session is not weak, and
 volatility is not extreme. It also keeps a paper record of its own trades and stops if they no longer cover costs.
 

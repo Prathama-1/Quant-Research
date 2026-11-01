@@ -203,7 +203,7 @@ def build():
     S.append(P('Task 1: long overnight, in healthy markets only', H1))
     S.append(P('<b>Idea.</b> Nifty\'s return arrives while the market is shut. From 2017 to Jan 2022 the overnight gap has a Sharpe of +3.4 (t = 7.5) and the open-to-close session -1.6 (t = -3.4), with those signs in every full year. '
                'The Task 2 daily file confirms it past the 15-minute data: +2.6 and -0.8 for Feb 2022 to Jun 2024. The 09:15 bar alone loses 6.5 bps a day (t = -6.2).'))
-    S.append(P('<b>Why it should work.</b> Overnight holders carry gap risk they cannot hedge or exit while the cash market is shut, and intraday leverage must be closed by the end of the day, so overnight capital is scarce and gets paid. '
+    S.append(P('<b>Why it should work.</b> Overnight holders carry gap risk that is hard to hedge or exit while the cash market is shut, and intraday leverage is normally closed by the end of the day, so overnight capital should be scarce and get paid. '
                'Buying pressure at the open then lifts the first print, which fades (Berkman et al. 2012; Lou, Polk and Skouras 2019). The premium is thin and the tail is large when the market falls, so I only take it when the market is calm and rising.'))
     S.append(P('<b>Rules.</b> At the close of the 14:30 bar, go long if (1) price is above its 20-day average, (2) the session so far is at least -0.25%, (3) 20-day realised vol is under 35%, and (4) the last 120 paper trades averaged at least 7 bps, which is the round-trip cost plus carry. '
                'Fill at 14:45, exit at the next morning\'s open, otherwise stay flat. Never short: shorts pay the gap, and long-short lost to long-flat in 10 of 11 trend configs. Deciding at 14:30 still fills before the close with a 2-bar delay. '
@@ -292,7 +292,7 @@ def build():
                ['Bear: universe about -10% a year', pct(off['bear']['cagr']), pct(off['bear']['dd']), num(off['bear']['sh'])],
                ['Oct 2021 to Feb 2022, before the window*', pct(sc['warm']['total']), pct(sc['warm']['dd']), num(sc['warm']['sharpe'])]]
     S.append(table(t2_rows, [COLW - 34 - 36 - 56, 34, 36, 56], bold_rows=(1,)))
-    S.append(P('*Total return, not CAGR. A weak stretch that was never used for tuning. The liquidity floor, tough and bear rows are means over 4 offsets.', SMALL))
+    S.append(P('*Total return, not CAGR, and not a scored result, as the brief reserves 2021 for indicator warm-up. It did inform my design choices: see Checks on page 3. The liquidity floor, tough and bear rows are means over 4 offsets.', SMALL))
     y = b2['yearly']
     S.append(table([['Year', '2022 (Mar on)', '2023', '2024 (to Jun)'], ['Return', pct(y['2022']), pct(y['2023']), pct(y['2024'])]], [40, 62, 40, COLW - 142]))
     S.append(Spacer(1, 3))
@@ -348,7 +348,8 @@ def build():
     S.append(P('What would break it', H2))
     S.append(P('<b>Survivorship</b> is the largest risk, covered on the next page. '
                '<b>Slow reaction.</b> The filter needs speed: if the signal arrives 1, 2, 3 or 10 days late, Sharpe is 2.85, 2.50, 1.77 and 1.60. '
-               '<b>Choppy markets.</b> Breadth hovering near 60% means selling lows and rebuying highs at 0.4% a round trip. '
+               '<b>Choppy markets.</b> Breadth hovering near 60% means selling lows and rebuying highs at 0.4% a round trip. This already happened: from Feb to Jun 2024 the strategy made +0.7% against +17.8% for the universe, with 14 filter flips and 36% winning trades. Only 5% of the 800 settings on page 3 made over 10% in those months, so tuning does not fix it. '
+               '<b>A less one-way market.</b> Apr 2023 to Jan 2024 gave 75% of the log return, when the universe alone scored Sharpe 5.65. Outside that stretch the strategy\'s Sharpe is 1.42 and its yearly return 16.8%. '
                '<b>Loss of leadership.</b> With no multi-baggers to catch, the top-10 share above suggests much of the return goes. '
                '<b>Corporate actions.</b> An event like ABFRL or STAR on a held name costs about 3% of equity at 1/15 weight, and nothing can see it coming. '
                '<b>Capacity.</b> The Rs 10 cr floor keeps small names eligible, and 0.2% a side may understate the cost of trading them in size.'))
@@ -366,12 +367,26 @@ def build():
                    num(fl_[1e8]['sh']), num(fl_[2.5e8]['sh']), num(fl_[5e8]['sh']), num(fl_[1e9]['sh']), pct(fl_[1e8]['cagr']), pct(fl_[2.5e8]['cagr']), pct(fl_[5e8]['cagr']), pct(fl_[1e9]['cagr']),
                    num(min(min(x['sh'] for x in T2['ghost']), min(x['sh'] for x in CK['sudden']))), num(max(max(x['sh'] for x in T2['ghost']), max(x['sh'] for x in CK['sudden']))))))
     S.append(P('<b>Measuring it properly.</b> Rebuild a point-in-time universe from NSE bhavcopies, including later-delisted names, apply the same liquidity rule each day, and re-run. Failing that, compare the equal-weight universe with an index whose past membership is fixed, such as Nifty 500 Equal Weight. Details are in <font name="Cal-I">survivorship_note.md</font>.'))
+    S.append(P('Would more tuning help?', H1))
+    S.append(P('No. I tested 800 settings per task with cross-validation (CSCV, Bailey et al.): pick the best on half the data, score it on the other half, and repeat for every split.'))
+    S.append(table([['Sharpe', 'Task 1, all', 'Task 1, no 14:45', 'Task 2'],
+                    ['Best settings, on the half used to pick them', '3.78', '3.46', '3.72'],
+                    ['Same settings, on the unseen half', '2.97', '2.35', '2.84'],
+                    ['Submitted settings', '2.95', '2.95', '3.01'],
+                    ['How often the best settings beat submitted', '54%', '5%', '47%']],
+                   [COLW - 3 * 42, 42, 42, 42]))
+    S.append(Spacer(1, 3))
+    S.append(P('I chose the submitted settings after seeing this data, so their row is flattered. The fair reading is the fall of about 1 Sharpe from picking winners, and I expect mine to fall on hidden data too.'))
+    S.append(P('<b>Task 1 trade-off.</b> Deciding at 14:45 gives Sharpe 3.57, worst loss -3.7% and 25.1% a year, a significant gain (95% CI +0.22 to +1.03). But a 2-bar delay then scores -3.37, because the fill misses the overnight gap. I kept 14:30 for that reason. '
+               '<b>Task 2 alternatives.</b> None is significantly better (means of 4 offsets, against 2.97): a skip-month signal 3.27, 12 positions with sell rank 20 3.09, and breadth 0.70 3.33, which falls to 0.78 in the tough case.'))
     S.append(FrameBreak())
     S.append(P('Checks', H1))
     la = T1['lookahead']
     S.append(P('<b>No look-ahead.</b> The harness check passes. On Task 1, %d further truncation cuts gave no mismatches, and corrupting all prices after a cut changed nothing before it. Task 2 only ever sees <font name="Cal-I">hist</font>.' % la['cuts']))
     S.append(P('<b>Reproducible.</b> Deterministic, with no dates in the code. Results are identical to 10 decimals on pandas 3.0.2 with numpy 2.4.4 and on pandas 2.2.3 with numpy 1.26.4. Task 1 runs in under 1 second and Task 2 in about 5 seconds, including on a test window as long as the hidden one.'))
     S.append(P('<b>Robust to odd data.</b> Both handle short sessions and cold starts: with too little history they stay flat. Task 2 also handles missing prices on a held stock and injected price shocks.'))
+    S.append(P('<b>What I looked at beyond the scored windows.</b> The brief reserves 2021 for indicator warm-up. The scored runs trade nothing before the window, but in research I also ran Task 2 over Oct 2021 to Feb 2022 as a weak-market check, and that and the tough case informed its design, so neither is independent evidence. '
+               'Task 1\'s later-period check uses the pack\'s daily Nifty file for Feb 2022 to Jun 2024, which overlaps the hidden window, so that stretch is not unseen by me.'))
     S.append(P('<b>Selection effects.</b> %d Task 1 and %s Task 2 configs are logged. Designs were compared by averages across many configs, not by the best row. The same discipline is why I rejected the highest in-sample Task 2 threshold and why Task 2 tables average over rebalance offsets: moving the rebalance day alone shifts Sharpe by about 0.3.' % (DC['t1_dsr']['n_trials'], format(DC['t2_dsr']['n_trials'], ','))))
     S.append(P('Notes on the brief', H1))
     S.append(P('<b>Parameter limit.</b> The email allows more than 6 parameters, but <font name="Cal-I">check_params</font> rejects them. So PARAMS has 6 and the others are module constants, listed with their tests above. '

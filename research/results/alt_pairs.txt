@@ -1,0 +1,67 @@
+﻿Eval window 2 Mar 2022 to 28 Jun 2024. Long-short, 100% gross per slot, unlevered, idle cash earns 0. Means over 3 book-start offsets.
+
+=== 1. Base configs: cost 0.2% per side per leg, same as Task 2
+distance, Rs 10 cr floor                           Sharpe -1.77 (-2.23 to -1.52)  DD   -3.3%  CAGR  -1.2%  avg gross  19%  trades/yr  396  corr Nifty -0.03
+distance, Rs 100 cr floor                          Sharpe -1.46 (-1.67 to -1.06)  DD   -3.1%  CAGR  -1.2%  avg gross  23%  trades/yr  375  corr Nifty  0.06
+coint, Rs 10 cr floor                              Sharpe -1.10 (-1.61 to -0.45)  DD   -3.4%  CAGR  -1.0%  avg gross  16%  trades/yr  354  corr Nifty  0.11
+coint, Rs 100 cr floor                             Sharpe -1.70 (-2.32 to -0.65)  DD   -3.2%  CAGR  -1.3%  avg gross  13%  trades/yr  254  corr Nifty  0.09
+
+=== 2. Cost per side (futures are cheaper than the 0.2% cash assumption)
+distance, Rs 100 cr floor, cost 0.00%              Sharpe  0.13 (-0.04 to  0.47)  DD   -1.1%  CAGR   0.1%  avg gross  23%  trades/yr  375  corr Nifty  0.06
+distance, Rs 100 cr floor, cost 0.05%              Sharpe -0.27 (-0.45 to  0.09)  DD   -1.5%  CAGR  -0.2%  avg gross  23%  trades/yr  375  corr Nifty  0.06
+distance, Rs 100 cr floor, cost 0.10%              Sharpe -0.66 (-0.86 to -0.30)  DD   -1.9%  CAGR  -0.5%  avg gross  23%  trades/yr  375  corr Nifty  0.06
+distance, Rs 100 cr floor, cost 0.20%              Sharpe -1.46 (-1.67 to -1.06)  DD   -3.1%  CAGR  -1.2%  avg gross  23%  trades/yr  375  corr Nifty  0.06
+coint, Rs 100 cr floor, cost 0.00%                 Sharpe -0.57 (-1.18 to  0.37)  DD   -1.7%  CAGR  -0.4%  avg gross  13%  trades/yr  254  corr Nifty  0.09
+coint, Rs 100 cr floor, cost 0.05%                 Sharpe -0.85 (-1.47 to  0.12)  DD   -2.0%  CAGR  -0.6%  avg gross  13%  trades/yr  254  corr Nifty  0.09
+coint, Rs 100 cr floor, cost 0.10%                 Sharpe -1.14 (-1.75 to -0.14)  DD   -2.3%  CAGR  -0.9%  avg gross  13%  trades/yr  254  corr Nifty  0.09
+coint, Rs 100 cr floor, cost 0.20%                 Sharpe -1.70 (-2.32 to -0.65)  DD   -3.2%  CAGR  -1.3%  avg gross  13%  trades/yr  254  corr Nifty  0.09
+
+=== 3. Full grid, Rs 100 cr floor, cost 0.05%: read the spread, not the best row
+  method  n  entry       z  sharpe  cagr     dd  gross    tr_yr   corr
+   coint 40    2.5 rolling   0.854 0.005 -0.007  0.068  371.227  0.098
+   coint 10    2.5 rolling   0.848 0.014 -0.023  0.177  243.871  0.126
+   coint 20    2.5 rolling   0.826 0.010 -0.014  0.131  359.264  0.111
+distance 10    1.5 rolling   0.784 0.019 -0.024  0.540  878.408 -0.002
+distance 40    2.5 rolling   0.696 0.008 -0.009  0.198 1033.055  0.009
+distance 20    2.5 rolling   0.636 0.008 -0.011  0.194  507.680 -0.031
+distance 10    2.0 rolling   0.593 0.012 -0.023  0.390  553.414 -0.028
+distance 20    1.5 rolling   0.576 0.013 -0.020  0.537 1727.906  0.000
+... worst:
+method  n  entry      z  sharpe   cagr     dd  gross   tr_yr  corr
+ coint 10    2.5 static  -1.011 -0.010 -0.025  0.131 139.195 0.118
+ coint 10    2.0 static  -1.009 -0.011 -0.032  0.171 169.850 0.137
+ coint 20    2.5 static  -0.887 -0.006 -0.016  0.096 207.982 0.106
+ coint 40    2.5 static  -0.880 -0.003 -0.009  0.050 216.331 0.093
+configs 36 | Sharpe median -0.05, q25 -0.52, q75 0.55, share above 0: 50%, share above 1: 0%
+          sharpe   cagr     dd  gross    tr_yr
+method                                        
+coint     -0.161  0.000 -0.020  0.183  465.650
+distance   0.070  0.003 -0.017  0.301  872.759
+    sharpe   cagr     dd  gross     tr_yr
+n                                        
+10  -0.075  0.002 -0.027  0.278   362.847
+20  -0.030  0.002 -0.018  0.246   631.568
+40  -0.032  0.001 -0.012  0.202  1013.200
+       sharpe   cagr     dd  gross    tr_yr
+entry                                      
+1.5    -0.058  0.002 -0.022  0.331  980.042
+2.0    -0.088  0.002 -0.020  0.249  662.451
+2.5     0.008  0.002 -0.015  0.146  365.121
+         sharpe   cagr     dd  gross    tr_yr
+z                                            
+rolling   0.525  0.008 -0.019  0.309  996.107
+static   -0.616 -0.005 -0.018  0.176  342.303
+
+=== 4. Year by year, best-median style config: rolling z, n 20, entry 2, Rs 100 cr, cost 0.05%
+distance {'cagr': 0.4} {'2022': 0.3, '2023': 0.9, '2024': -0.4}
+coint {'cagr': 1.0} {'2022': 1.6, '2023': -0.3, '2024': 1.1}
+
+=== 5. Official Task 2 harness: long-only version, buy only the cheap leg, 15 positions, 0.2% per side
+distance, Rs 10 cr, static z       no filter        Sharpe  1.40 DD  -13.6% CAGR  18.7% trades/yr  237 in-mkt  99%
+distance, Rs 10 cr, static z       breadth >= 60%   Sharpe  1.00 DD   -8.9% CAGR   8.6% trades/yr  222 in-mkt  57%
+coint, Rs 10 cr, static z          no filter        Sharpe  1.24 DD  -24.9% CAGR  26.1% trades/yr  244 in-mkt  95%
+coint, Rs 10 cr, static z          breadth >= 60%   Sharpe  1.23 DD  -15.9% CAGR  17.4% trades/yr  228 in-mkt  55%
+distance, Rs 10 cr, rolling z      no filter        Sharpe  1.41 DD  -12.2% CAGR  20.2% trades/yr  230 in-mkt  97%
+distance, Rs 10 cr, rolling z      breadth >= 60%   Sharpe  1.04 DD   -8.3% CAGR   8.9% trades/yr  206 in-mkt  56%
+
+For comparison: submitted Task 2 Sharpe 3.05, DD -11.2%, CAGR 48.0%. 15 random stocks, monthly: Sharpe 1.66, DD -21.0%, CAGR 33.9%.

@@ -1,0 +1,79 @@
+﻿Costs per side used, bps: 0 = none; 0.5 = illustrative low; 2.5 = harness; 2.78 = NSE futures now, averaging 5 bps STT on sells + about 0.2 exchange + 0.2 stamp on buys
+
+=== A1. Quoting on real bars vs the same bars shuffled, optimistic fills, zero cost
+half-spread  2 bps, real                 Sharpe  -3.46  DD   -84.6%  CAGR  -31.7%  fills/yr   9779  net bps per fill  -0.44
+half-spread  2 bps, SHUFFLED control     Sharpe  -2.93  DD   -73.4%  CAGR  -23.4%  fills/yr   9848  net bps per fill  -0.33
+half-spread  5 bps, real                 Sharpe  -1.80  DD   -69.6%  CAGR  -16.2%  fills/yr   7158  net bps per fill  -0.32
+half-spread  5 bps, SHUFFLED control     Sharpe  -1.55  DD   -49.9%  CAGR  -11.5%  fills/yr   7178  net bps per fill  -0.25
+half-spread 10 bps, real                 Sharpe  -1.41  DD   -61.3%  CAGR  -11.6%  fills/yr   4448  net bps per fill  -0.39
+half-spread 10 bps, SHUFFLED control     Sharpe  -1.15  DD   -38.6%  CAGR   -7.0%  fills/yr   4505  net bps per fill  -0.28
+half-spread 20 bps, real                 Sharpe  -1.72  DD   -48.8%  CAGR  -11.9%  fills/yr   1880  net bps per fill  -0.96
+half-spread 20 bps, SHUFFLED control     Sharpe  -0.93  DD   -34.5%  CAGR   -3.7%  fills/yr   2000  net bps per fill  -0.46
+half-spread 40 bps, real                 Sharpe  -1.30  DD   -36.0%  CAGR   -5.7%  fills/yr    480  net bps per fill  -2.36
+half-spread 40 bps, SHUFFLED control     Sharpe  -0.84  DD   -24.3%  CAGR   -1.7%  fills/yr    540  net bps per fill  -1.35
+
+=== A1b. Simulator test on a pure random walk, half-spread 10, zero cost. Net bps per fill should shrink towards 0 as steps get finer
+skew 0.0,  15 steps per bar: net bps per fill [-2.39, -1.46] | Sharpe [-4.96, -3.3] | CAGR [-20.3, -11.4]
+skew 0.0,  60 steps per bar: net bps per fill [-0.94, -0.29] | Sharpe [-2.08, -0.67] | CAGR [-6.5, 1.8]
+skew 0.0, 240 steps per bar: net bps per fill [0.27, 0.17] | Sharpe [0.68, 0.45] | CAGR [10.1, 8.6]
+skew 0.0, 900 steps per bar: net bps per fill [0.2, 0.2] | Sharpe [0.56, 0.49] | CAGR [9.2, 8.9]
+skew 0.5,  15 steps per bar: net bps per fill [-1.99, -1.59] | Sharpe [-6.33, -5.4] | CAGR [-24.0, -19.3]
+skew 0.5,  60 steps per bar: net bps per fill [-0.99, -0.61] | Sharpe [-3.55, -2.37] | CAGR [-12.2, -5.5]
+skew 0.5, 240 steps per bar: net bps per fill [-0.11, -0.29] | Sharpe [-0.45, -1.28] | CAGR [3.6, 0.1]
+skew 0.5, 900 steps per bar: net bps per fill [-0.18, -0.13] | Sharpe [-0.8, -0.54] | CAGR [2.1, 3.2]
+
+=== A2. Cost sensitivity, optimistic fills, real bars
+half-spread  5, cost 0.00                Sharpe  -1.80  DD   -69.6%  CAGR  -16.2%  fills/yr   7158  net bps per fill  -0.32
+half-spread  5, cost 0.50                Sharpe  -4.65  DD   -92.5%  CAGR  -41.4%  fills/yr   7158  net bps per fill  -0.82
+half-spread  5, cost 1.30                Sharpe  -9.19  DD   -99.5%  CAGR  -67.0%  fills/yr   7158  net bps per fill  -1.62
+half-spread  5, cost 2.50                Sharpe -15.88  DD  -100.0%  CAGR  -86.1%  fills/yr   7158  net bps per fill  -2.82
+half-spread  5, cost 2.78                Sharpe -17.40  DD  -100.0%  CAGR  -88.6%  fills/yr   7158  net bps per fill  -3.10
+half-spread 10, cost 0.00                Sharpe  -1.41  DD   -61.3%  CAGR  -11.6%  fills/yr   4448  net bps per fill  -0.39
+half-spread 10, cost 0.50                Sharpe  -3.20  DD   -81.4%  CAGR  -29.3%  fills/yr   4448  net bps per fill  -0.89
+half-spread 10, cost 1.30                Sharpe  -6.05  DD   -96.7%  CAGR  -50.5%  fills/yr   4448  net bps per fill  -1.69
+half-spread 10, cost 2.50                Sharpe -10.16  DD   -99.7%  CAGR  -71.0%  fills/yr   4448  net bps per fill  -2.89
+half-spread 10, cost 2.78                Sharpe -11.09  DD   -99.9%  CAGR  -74.4%  fills/yr   4448  net bps per fill  -3.17
+half-spread 20, cost 0.00                Sharpe  -1.72  DD   -48.8%  CAGR  -11.9%  fills/yr   1880  net bps per fill  -0.96
+half-spread 20, cost 0.50                Sharpe  -2.60  DD   -65.8%  CAGR  -19.8%  fills/yr   1880  net bps per fill  -1.46
+half-spread 20, cost 1.30                Sharpe  -3.98  DD   -83.5%  CAGR  -31.0%  fills/yr   1880  net bps per fill  -2.26
+half-spread 20, cost 2.50                Sharpe  -5.94  DD   -94.4%  CAGR  -45.0%  fills/yr   1880  net bps per fill  -3.46
+half-spread 20, cost 2.78                Sharpe  -6.37  DD   -95.7%  CAGR  -47.8%  fills/yr   1880  net bps per fill  -3.74
+half-spread 40, cost 0.00                Sharpe  -1.30  DD   -36.0%  CAGR   -5.7%  fills/yr    480  net bps per fill  -2.36
+half-spread 40, cost 0.50                Sharpe  -1.57  DD   -39.9%  CAGR   -7.9%  fills/yr    480  net bps per fill  -2.86
+half-spread 40, cost 1.30                Sharpe  -1.98  DD   -47.4%  CAGR  -11.4%  fills/yr    480  net bps per fill  -3.66
+half-spread 40, cost 2.50                Sharpe  -2.57  DD   -60.0%  CAGR  -16.4%  fills/yr    480  net bps per fill  -4.86
+half-spread 40, cost 2.78                Sharpe  -2.71  DD   -62.4%  CAGR  -17.5%  fills/yr    480  net bps per fill  -5.14
+
+=== A3. Harder fills, half-spread 10 bps, cost 0 and 2.78
+both-sides fill, through 0 bps, cost 0.00 Sharpe  -1.41  DD   -61.3%  CAGR  -11.6%  fills/yr   4448  net bps per fill  -0.39
+both-sides fill, through 1 bp, cost 0.00 Sharpe  -4.51  DD   -91.3%  CAGR  -39.6%  fills/yr   3984  net bps per fill  -1.39
+both-sides fill, through 3 bps, cost 0.00 Sharpe  -8.82  DD   -99.4%  CAGR  -65.7%  fills/yr   3181  net bps per fill  -3.52
+adverse-side only, cost 0.00             Sharpe  -7.24  DD   -99.9%  CAGR  -76.0%  fills/yr   3713  net bps per fill  -3.93
+both-sides fill, through 0 bps, cost 2.78 Sharpe -11.09  DD   -99.9%  CAGR  -74.4%  fills/yr   4448  net bps per fill  -3.17
+both-sides fill, through 1 bp, cost 2.78 Sharpe -12.93  DD  -100.0%  CAGR  -80.1%  fills/yr   3984  net bps per fill  -4.17
+both-sides fill, through 3 bps, cost 2.78 Sharpe -14.56  DD  -100.0%  CAGR  -85.9%  fills/yr   3181  net bps per fill  -6.30
+adverse-side only, cost 2.78             Sharpe -12.13  DD  -100.0%  CAGR  -91.5%  fills/yr   3713  net bps per fill  -6.71
+
+=== A4. Inventory skew (reservation-price strength), half-spread 10 bps, zero cost
+skew 0.00                                Sharpe  -0.23  DD   -49.4%  CAGR    2.0%  fills/yr   3455  net bps per fill  -0.09
+skew 0.25                                Sharpe  -0.73  DD   -55.8%  CAGR   -4.3%  fills/yr   3964  net bps per fill  -0.24
+skew 0.50                                Sharpe  -1.41  DD   -61.3%  CAGR  -11.6%  fills/yr   4448  net bps per fill  -0.39
+skew 1.00                                Sharpe  -2.46  DD   -66.6%  CAGR  -20.1%  fills/yr   5287  net bps per fill  -0.52
+skew 2.00                                Sharpe  -2.49  DD   -64.5%  CAGR  -18.9%  fills/yr   5082  net bps per fill  -0.52
+
+=== B. Official harness: fade stretches from a short EMA, intraday only, taking liquidity
+ ema   k  sharpe     dd   cagr  tr_yr    d1    c2
+   4 1.0   -4.16 -78.56 -27.25  506.7 -3.72 -7.03
+   4 1.5   -3.10 -55.15 -15.24  299.8 -2.37 -5.17
+   4 2.0   -2.42 -36.16  -8.82  180.8 -1.86 -3.84
+   4 3.0   -2.04 -14.58  -2.60   75.0 -0.87 -2.88
+   8 1.0   -3.47 -73.66 -24.10  383.5 -3.69 -5.54
+   8 1.5   -2.28 -45.23 -11.68  235.0 -2.33 -3.77
+   8 2.0   -1.71 -26.97  -5.96  143.7 -1.85 -2.74
+   8 3.0   -0.98 -10.51   0.98   51.8 -0.97 -1.49
+  25 1.0   -1.87 -53.66 -14.57  244.7 -2.05 -2.97
+  25 1.5   -1.12 -28.05  -5.29  145.8 -1.58 -1.87
+  25 2.0   -0.62 -11.79   0.12   87.2 -0.62 -1.12
+  25 3.0   -0.07 -10.82   5.34   25.5 -0.30 -0.26
+
+For comparison, submitted Task 1: Sharpe 2.95, DD -4.7%, CAGR 22.5%

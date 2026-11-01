@@ -25,8 +25,9 @@ In-sample numbers flatter both strategies. See `report.pdf` for the stress tests
 | `report.pdf` | Three-page write-up |
 | `failed_ideas.md` | What did not work, with numbers |
 | `survivorship_note.md` | The Task 2 universe's bias and how I estimated its impact |
-| `research/` | Every experiment script, with logged output in `research/results/` |
+| `research/` | The scripts and logs behind the report's numbers. Earlier exploratory sweeps and their logs are in commit `d45075f` |
 | `report/build_report.py` | Rebuilds `report.pdf` from the logged results |
+| `colab.py` | Every data insight as a chart, split into notebook cells by `# %%` |
 
 ## Running it
 

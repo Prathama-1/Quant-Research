@@ -5,6 +5,8 @@ Running log of decisions and results. Newest state first under "Status"; everyth
 
 ## Status
 
+- Tidied 2026-11-01: exploratory scripts and logs named in the Log below were removed from the tree. They are in git at commit `d45075f`.
+
 - Data QA done (`research/qa_data.py`).
 - Task 1 built: `task1.py`, tested by `research/t1_final.py` (results/t1_final.txt, .json). Overnight long, filtered by MA20,
   session so far >= -0.25%, 20d vol < 35%, paper-trade gate. Official: CAGR 22.49%, DD -4.73%, Sharpe 2.946, 110 trades/yr.
@@ -15,6 +17,19 @@ Running log of decisions and results. Newest state first under "Status"; everyth
 - Deliverables done: `failed_ideas.md`, `survivorship_note.md`, `report.pdf` via `report/build_report.py`, `README.md`,
   `Prathama_Bharadwaj.zip`. The zip's copies were re-run through the harness. Nothing committed or pushed: the user does that.
 - The author name on the report and the zip was inferred from the user's email, and the user was asked to confirm it.
+
+- Side tests after the push, not in the submission: market making (`alt_mm.py`) and pair trading (`alt_pairs.py`), logs in
+  results/alt_mm.txt and alt_pairs.txt. Neither beats the submitted strategies. The pack has no order book, so true spread capture is
+  untestable. On a random walk the quote simulator's loss shrinks to about +/-0.2 bps per fill as steps get finer, so it is roughly fair.
+  Added to failed_ideas.md and the zip at the user's request; basket and order-book upside are marked as untested.
+
+- Optimisation check, 1 Nov 2026 (`opt_check.py`, `opt_t1_1445.py`, `opt_t2_periods.py`, `opt_t2_alts.py`, full summary in data/findings.txt
+  section 9). Re-tuning does not help out of sample, so both strategies stay as submitted unless the user decides otherwise. Open
+  trade-off: Task 1 at 14:45 (Sharpe 3.57, but 2-bar delay -3.37). Warning sign: Task 2 made +0.7% in Feb-Jun 2024 against +17.8% for the
+  universe, and 75% of its return came from Apr 2023 to Jan 2024. The report does not state these numbers yet.
+- "Never used for tuning" was false and is fixed in report.pdf and failed_ideas.md; both overlaps are disclosed there. `opt_without_peeking.py`
+  re-ranks without that data. Task 2 falls to 48 of 800, and 0.60 ties 0.70 on its own rules. Task 1 is 38 of 800, and floor 0 beats -0.25% on
+  worst case but earns less. Not changing anything: the gaps are within noise and re-tuning would reuse the same data.
 
 ## Discrepancies in the brief
 

@@ -21,8 +21,7 @@ The hidden run is the real test, so robustness beats in-sample polish.
 ```
 python harness_public.py task1 task1.py     # official score for Task 1 (also runs the look-ahead check)
 python harness_public.py task2 task2.py     # official score for Task 2
-python research/both_checks.py              # both official runs + static checks; compare its T1/T2 lines across environments
-python research/qa_data.py                  # data QA against what the README claims
+python research/compliance_check.py         # the brief's rules, one by one (the report checks need pymupdf)
 ```
 
 Run these from inside `research/`, because they import `common.py` and write relative paths. Each writes to `results/`:
@@ -33,6 +32,10 @@ python t2_final.py     # full battery on the real task2.py, about 15 min, writes
 python t2_checks.py    # liquidity buckets, ghosts, speed, shocks, cold start, writes t2_checks.json
 python t2_decomp.py    # timing vs selection, bootstrap CI, deflated Sharpe, equity CSVs, writes t_decomp.json
 ```
+
+Side tests, not part of the submission: `python alt_mm.py`, `python alt_pairs.py` (market making and pairs), and
+`python opt_check.py t1` or `t2` with `opt_t1_1445.py`, `opt_t2_periods.py`, `opt_t2_alts.py` (is further tuning worthwhile? It was not).
+`colab.py` in the root holds every insight as a chart, split into cells by `# %%`; the user pastes these into their own notebook.
 
 `report/build_report.py` builds `report.pdf` (must stay at 3 pages) from those JSON files and needs reportlab, matplotlib, pillow
 and pymupdf, which are not in the system Python. It also saves page PNGs to `report/figures/` for visual checks.
@@ -57,15 +60,18 @@ Research code should import the harness and reuse its functions so that results 
 `task2_backtest(m, D, params, start, end, cost=...)`, `task2_stats(res, start, end)`. Stress tests are done from outside:
 pass `cost=2*T1_COST` for 2x costs, and shift `want` by k bars for a k-bar fill delay.
 
-Research splits into two layers. `t1_lab*.py` and `t2_lab.py` with `t2_run*.py` are fast sweeps with their own signal code
-(Task 2 precomputes features), used to choose a design. `t1_final.py`, `t2_final.py`, `t2_checks.py` and `t2_decomp.py` test the
+Research splits into two layers. `t1_lab2.py` and `t2_lab.py` are fast research engines with their own signal code (Task 2
+precomputes features), used to choose a design. `t1_final.py`, `t2_final.py`, `t2_checks.py` and `t2_decomp.py` test the
 real `task1.py` and `task2.py`. Quote the second layer as results and treat the first only as comparisons.
+The exploratory sweeps (`t1_lab.py`, `t2_run*.py`, `qa_*.py`) and their logs were removed from the tree on 2026-11-01 and are still in
+git at commit `d45075f`. Their config CSVs stay in `research/results/`, because `t2_decomp.py` reads them.
 
 Out-of-sample tools built here, since the firm's hidden data is unavailable:
 - `research/synth.py`: Task 1 bars for Feb 2022 to Jun 2024 from the real daily Nifty OHLC with synthetic paths inside each day.
   Valid only for day-level logic; bar-level strategies give meaningless results on it.
 - `strip_drift` in `t2_lab.py`: the "tough" (universe about +10%/yr) and "bear" (about -10%/yr) scenarios for Task 2.
-- The warm-up window, Oct 2021 to Feb 2022, as a weak-market check for Task 2. It is never used by the signals.
+- The warm-up window, Oct 2021 to Feb 2022, as a weak-market check for Task 2. Signals use it only as history, but looking at it
+  informed design choices, and the brief reserves 2021 for warm-up, so the report discloses this.
 
 Timing luck is large in Task 2: moving the rebalance day alone shifts Sharpe by about 0.3. Compare configs as means over offsets.
 
@@ -101,7 +107,7 @@ Deliverables, in one zip named `<your_name>.zip` (currently `Prathama_Bharadwaj.
 year-wise results, turnover and cost drag, results with the best year removed, share of profit from the top 10 trades
 (Task 2), what would break the strategy, and for Task 1 the 1-bar delay, 2-bar delay and 2x-cost results.
 
-## Data facts verified by `research/qa_data.py`
+## Data facts verified by the data QA (`research/qa_data.py` in commit `d45075f`)
 
 The full log is `data/findings.txt` (local only, because `data/` is gitignored). The facts most likely to matter:
 
@@ -113,7 +119,7 @@ The full log is `data/findings.txt` (local only, because `data/` is gitignored).
 - Task 2: 555 symbols (the email says ~585, README says 555), 790 days. 2022-03-01 was a holiday, so the first evaluated day
   is 2022-03-02 and `orders()` is first called on 2022-02-28.
 - Jump anomalies: SPLPETRO -49.1% on 2022-06-07 (in the README) and NMDC **+85.7%** on 2022-10-27 (not in the README).
-  `research/qa_jumps.py` separates real moves from artefacts by traded value. SCI +30.0% (2023-03-31) and ALLCARGO -21.0%
+  Cell 2.5 of `colab.py` separates real moves from artefacts by traded value. SCI +30.0% (2023-03-31) and ALLCARGO -21.0%
   (2023-04-18) look like artefacts but sit under the 45% rule in `task2.py`; no trades were affected. Real moves also exist, so
   filters must not be too tight: ZEEL -32.6% on 2024-01-23 and +40.0% on 2021-09-14, OFSS +30.1%, PAYTM -20% (limit-down lock).
   Interior missing days: FORCEMOT 76, AWL 71, E2E-BE 41, SHRIPISTON 3, DIACABS-BE 1.
