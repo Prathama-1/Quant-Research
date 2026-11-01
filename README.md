@@ -10,7 +10,7 @@ My solution to a quant research take-home with two systematic strategies:
 | Task 1, Apr 2017 to Jan 2022 | 2.95 | -4.7% | 22.5% | 110 | Sharpe > 1.0, DD better than -15% |
 | Task 2, 2 Mar 2022 to 30 Jun 2024 | 3.05 | -11.2% | 48.0% | 94 | Sharpe > 1.9, DD better than -25% |
 
-In-sample numbers flatter both strategies. See `report.pdf` for the stress tests, the out-of-sample checks and what I expect on unseen data.
+In-sample numbers flatter both strategies. `report/build_report.py` builds the report, which has the stress tests, the out-of-sample checks and what I expect on unseen data.
 
 ## The strategies
 
@@ -22,12 +22,10 @@ In-sample numbers flatter both strategies. See `report.pdf` for the stress tests
 | Path | Contents |
 |---|---|
 | `task1.py`, `task2.py` | The two strategies |
-| `report.pdf` | Three-page write-up |
 | `failed_ideas.md` | What did not work, with numbers |
 | `survivorship.txt` | The Task 2 universe's bias and how I estimated its impact |
 | `research/` | The scripts and logs behind the report's numbers. Earlier exploratory sweeps and their logs are in commit `d45075f` |
-| `report/build_report.py` | Rebuilds `report.pdf` from the logged results |
-| `colab.py` | Every data insight as a chart, split into notebook cells by `# %%` |
+| `report/build_report.py` | Builds the three-page report from the logged results |
 
 ## Running it
 

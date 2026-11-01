@@ -10,3 +10,8 @@ __pycache__/
 .venv/
 *.zip
 report/figures/
+
+# Kept local only
+CLAUDE.md
+colab.py
+report.pdf
