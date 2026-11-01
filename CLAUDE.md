@@ -103,7 +103,7 @@ always work on a tail (`iloc[-300:]`) to stay fast; the 10-minute limit includes
 
 Deliverables, in one zip named `<your_name>.zip` (currently `Prathama_Bharadwaj.zip`), without `data/` or the harness:
 `task1.py`, `task2.py`, any helper `.py`, `failed_ideas.md` (3+ ideas with actual numbers and a one-line reason),
-`survivorship_note.md`, and `report.pdf` (max 3 pages). Rebuild the zip after any change to these. The report covers: economic rationale, a sensitivity table of at least 3x3 with each parameter's tested range,
+`survivorship.txt`, and `report.pdf` (max 3 pages). Rebuild the zip after any change to these. The report covers: economic rationale, a sensitivity table of at least 3x3 with each parameter's tested range,
 year-wise results, turnover and cost drag, results with the best year removed, share of profit from the top 10 trades
 (Task 2), what would break the strategy, and for Task 1 the 1-bar delay, 2-bar delay and 2x-cost results.
 

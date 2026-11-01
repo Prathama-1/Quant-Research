@@ -14,7 +14,7 @@ Running log of decisions and results. Newest state first under "Status"; everyth
   session_floor was chosen after seeing OOS, so OOS is not a clean holdout: grid median OOS is 1.12. Expect about 1 on hidden.
 - Task 2 built: `task2.py`. Official: CAGR 48.03%, DD -11.24%, Sharpe 3.05, 94 trades/yr. Mean of 4 offsets 2.97. Ex-2023 2.43.
   Tough 1.57, bear 0.20, warm +0.7%. Rs 50 cr floor 1.92, 27.6% CAGR. Top 10 trades 56.9% of net P&L. Expect 1 to 1.5 on hidden.
-- Deliverables done: `failed_ideas.md`, `survivorship_note.md`, `report.pdf` via `report/build_report.py`, `README.md`,
+- Deliverables done: `failed_ideas.md`, `survivorship.txt`, `report.pdf` via `report/build_report.py`, `README.md`,
   `Prathama_Bharadwaj.zip`. The zip's copies were re-run through the harness. Nothing committed or pushed: the user does that.
 - The author name on the report and the zip was inferred from the user's email, and the user was asked to confirm it.
 

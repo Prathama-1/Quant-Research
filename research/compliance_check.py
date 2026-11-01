@@ -132,7 +132,7 @@ print('\n=== Submission zip')
 zp = os.path.join(ROOT, 'Prathama_Bharadwaj.zip')
 with zipfile.ZipFile(zp) as z:
     names = [i.filename for i in z.infolist()]
-    check('Exactly the required files', sorted(names) == sorted(['task1.py', 'task2.py', 'report.pdf', 'failed_ideas.md', 'survivorship_note.md']), str(names))
+    check('Exactly the required files', sorted(names) == sorted(['task1.py', 'task2.py', 'report.pdf', 'failed_ideas.md', 'survivorship.txt']), str(names))
     check('No data folder or harness', not any(('data' in n and n.endswith('.csv')) or 'harness' in n for n in names))
     stale = [n for n in names if z.read(n) != open(os.path.join(ROOT, n), 'rb').read()]
     check('Zip copies match the current files', not stale, str(stale) if stale else '')
